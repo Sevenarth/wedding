@@ -5,9 +5,9 @@
 	import ScrollAnchor from "$lib/ScrollAnchor.svelte";
 </script>
 
-<section class="relative h-svh md:h-screen w-screen">
+<section class="relative snap-start h-svh md:h-screen w-screen">
     <img src={coralPeonies} alt="Coral Peonies" class="absolute inset-0 w-full h-full object-cover z-[-1]" />
-    <div class="overlay w-full h-full flex flex-col justify-between items-center snap-start pt-12 px-8 text-center z-[2] text-xl md:text-2xl">
+    <div class="overlay w-full h-full flex flex-col justify-between items-center pt-12 px-8 text-center z-[2] text-xl md:text-2xl">
         <Header splash />
         <div class="flex flex-col items-center">
             Have you got your invite to our wedding yet?

@@ -34,13 +34,3 @@ export const makeObserver = (options: IntersectionObserverInit): ObserverAction 
         });
     };
 };
-
-export function makeBottomlessStack<Type>(default_value: Type) {
-    const stack = $state([default_value]);
-
-    return {
-        pop: (): Type => (stack.length > 1 ? stack.pop() : stack.at(0)) as Type,
-        push: (value: Type) => stack.push(value),
-        last() { return stack.at(-1); }
-    }
-};
