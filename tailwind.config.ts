@@ -6,7 +6,12 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				'sage': '#d2d4c4',
+				'peach': '#ffb3a0',
+			},
+		}
 	},
 
 	plugins: [typography, forms]

@@ -3,13 +3,8 @@
 @import 'tailwindcss/utilities';
 @import url('https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&family=Style+Script&display=swap');
 
-:root {
-    --sage: #d2d4c4;
-    --peach: #ffb3a0;
-}
-
-html {
-    overflow: hidden;
+body, html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -18,14 +13,6 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
-
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4, h5, h6 {
