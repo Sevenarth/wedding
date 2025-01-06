@@ -18,11 +18,11 @@
             <span>Thank you for visiting our page!</span>
             <button class="my-8 p-4 text-black text-2xl bg-peach">RSVP here</button>
         </div>
-        <h2 class="mb-28 text-6xl">Our story</h2>
+        <h2 class="mb-28 md:mb-16 text-6xl">Our story</h2>
     </div>
 </section>
 
-<section class="-mt-24 md:mb-8">
+<section class="-mt-24 md:-mt-12 md:mb-8">
     {#each story as entry, i}
         <div 
             id={`story-${i+1}`}
