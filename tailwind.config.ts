@@ -8,7 +8,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				'sage': '#d2d4c4',
+				'sage': 'rgb(229, 233, 211)',
 				'peach': '#ffb3a0',
 			},
 		}

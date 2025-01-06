@@ -1,11 +1,11 @@
 <script lang="ts">
     import * as m from "$paraglide/messages";
     import anagramBlack from "$lib/assets/anagram.png";
-    import anagramSage from "$lib/assets/anagram-sage.png";
+    import anagramGreen from "$lib/assets/anagram-green.png";
 
     const {splash = false} = $props();
 
-    const anagramSrc = splash ? anagramSage : anagramBlack;
+    const anagramSrc = splash ? anagramGreen : anagramBlack;
     const width = splash ? "w-24 md:w-36" : "w-16";
     const extraClasses = !splash ? "p-4 fixed z-[-1]" : "";
 </script>
