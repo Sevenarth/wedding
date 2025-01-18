@@ -1,8 +1,10 @@
 <script lang="ts">
+    import * as m from "$paraglide/messages";
     import coralPeonies from "$lib/assets/coral-peonies.png";
     import Header from "$lib/Header.svelte";
 	import { makeObserver } from "$lib/actions.svelte";
     import story from "$lib/story";
+	import Footer from "$lib/Footer.svelte";
 
     const pictureRotations = ["rotate-1", "-rotate-1"];
 
@@ -13,10 +15,11 @@
 <section class="relative snap-start h-max w-screen text-green-900">
     <img src={coralPeonies} alt="Coral Peonies" class="absolute inset-0 w-full h-full object-cover z-[-1]" />
     <div class="overlay w-full h-full flex flex-col justify-between items-center pt-12 px-8 text-center z-[2] text-xl md:text-2xl">
-        <Header splash />
+        <Header big coloured />
+        <h1>{m.heroic_less_jackal_arrive()}</h1>
         <div class="flex flex-col items-center my-10">
             <span>Thank you for visiting our page!</span>
-            <button class="my-8 p-4 text-black text-2xl bg-peach">RSVP here</button>
+            <a href="/login" class="my-8 p-4 text-black text-2xl bg-peach">RSVP here</a>
         </div>
         <h2 class="mb-28 md:mb-16 text-6xl">Our story</h2>
     </div>
@@ -42,12 +45,10 @@
     {/each}
 </section>
 
+<Footer />
+
 <style>
     :global(html) {
         scroll-snap-type: y proximity;
-    }
-
-    div.overlay {
-        background-color: rgba(255, 228, 189, 0.3);
     }
 </style>
