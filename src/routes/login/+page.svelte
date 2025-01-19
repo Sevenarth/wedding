@@ -33,7 +33,7 @@
     <div class="overlay w-full min-h-dvh flex flex-col justify-between items-center pt-12 px-8 z-[2] text-xl md:text-2xl">
         <Header coloured />
         <h2 class="text-5xl mb-6">Your invitation</h2>
-        <form method="post" class="grow flex flex-col justify-between w-full max-w-sm text-black">
+        <form method="post" class="grow flex flex-col w-full max-w-sm text-black">
             <div>
                 {#if form?.error}<div class="bg-white/50 border-l-4 border-red-600 p-2 text-lg mb-4 md:mb-6">{form.error}</div>{/if}
                 <div class="flex flex-col text-left mb-4 md:mb-6">
