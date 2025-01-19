@@ -1,7 +1,7 @@
 <script lang="ts">
     import ChevronLeft from "~icons/tabler/chevron-left";
-    import Cross from "~icons/tabler/x";
     import Help from "~icons/tabler/help";
+    import Loader from "~icons/tabler/loader-2";
     import { PUBLIC_TURNSTILE_KEY as siteKey } from "$env/static/public";
     import * as m from "$paraglide/messages";
     import coralPeonies from "$lib/assets/coral-peonies.png";
@@ -10,6 +10,8 @@
     import Header from "$lib/Header.svelte";
     import { Turnstile } from "svelte-turnstile";
 	import type { PageData, ActionData } from './$types';
+
+    let ready = $state(false);
 
 	let { data, form }: { data: PageData, form: ActionData } = $props();
 </script>
@@ -26,14 +28,14 @@
     </div>
 </section>
 
-<section class="relative h-dvh w-screen text-green-900">
+<section class="relative min-h-dvh w-screen text-green-900">
     <img src={coralPeonies} alt="Coral Peonies" class="absolute inset-0 w-full h-full object-cover z-[-1]" />
-    <div class="overlay w-full h-full flex flex-col justify-between items-center pt-12 px-8 text-center z-[2] text-xl md:text-2xl">
+    <div class="overlay w-full min-h-dvh flex flex-col justify-between items-center pt-12 px-8 z-[2] text-xl md:text-2xl">
         <Header coloured />
         <h2 class="text-5xl mb-6">Your invitation</h2>
         <form method="post" class="grow flex flex-col justify-between w-full max-w-sm text-black">
-            {#if form?.error}<p>{form.error}</p>{/if}
             <div>
+                {#if form?.error}<div class="bg-white/50 border-l-4 border-red-600 p-2 text-lg mb-4 md:mb-6">{form.error}</div>{/if}
                 <div class="flex flex-col text-left mb-4 md:mb-6">
                     <label for="name">Your name</label>
                     <input type="text" id="name" name="name" value={form?.name ?? ""} autocomplete="given-name" placeholder="e.g. John" />
@@ -43,10 +45,16 @@
                     <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder="e.g. 1234" />
                     <a href="#where-is-my-code" class="text-lg"><Help class="icon" /> <span class="underline">Where is my code?</span></a>
                 </div>
-                <Turnstile {siteKey} size="invisible" />
+                <Turnstile {siteKey} size="invisible" on:callback={() => { ready = true }} />
             </div>
             <div class="flex flex-col mb-8">
-                <button class="mb-4 big">Enter</button>
+                <button class="mb-4 big" disabled={!ready}>
+                    {#if !ready}
+                        <Loader class="icon text-2xl animate-spin" />
+                    {:else}
+                        Enter
+                    {/if}
+                </button>
                 <a href="/" class="button secondary">
                     <ChevronLeft class="icon" /> Return to the homepage
                 </a>

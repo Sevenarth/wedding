@@ -1,6 +1,7 @@
 import { SECRET_TURNSTILE_KEY as SECRET_KEY } from "$env/static/private";
 import { fail } from "@sveltejs/kit";
-import type { Action } from "./$types.js";
+import type { Actions } from "./$types.js";
+import * as m from "$paraglide/messages";
 
 interface TokenValidationResponse {
 	success: boolean;
@@ -12,7 +13,7 @@ interface TokenValidationResponse {
 
 const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
-async function validateToken(request: Request, token: FormDataEntryValue): Promise<TokenValidationResponse> {
+async function validateToken(request: Request, token: FormDataEntryValue): Promise<{success: boolean, error: string | undefined}> {
     const formData = new FormData();
     formData.append("secret", SECRET_KEY);
     formData.append("response", token);
@@ -24,7 +25,9 @@ async function validateToken(request: Request, token: FormDataEntryValue): Promi
         body: formData,
 	});
     
-    return validationRequest.json<TokenValidationResponse>();
+    return validationRequest.json<TokenValidationResponse>().then(
+        ({success, "error-codes": errorCodes}) => ({success, error: errorCodes.at(0)}
+    ));
 }
 
 export const actions = {
@@ -33,19 +36,18 @@ export const actions = {
         const name = data.get("name");
         const accessCode = data.get("access-code");
 		const token = data.get("cf-turnstile-response");
+        console.log(name, data)
 
         if (!token)
-            return fail(400, { name, error: "missing-captcha" });
+            return fail(400, { name, error: `${m.whole_due_skunk_tap()} missing-captcha` });
 
-		const { success, "error-codes": errorCodes } = await validateToken(request, token);
-        console.log(success, errorCodes)
+		const { success, error } = await validateToken(request, token);
+		if (!success) {
+			return fail(400, { name, error: `${m.whole_due_skunk_tap()} ${error} `});
+        }
 
-		if (!success)
-			return fail(400, {
-                name,
-				error: errorCodes.at(0) ?? "invalid-captcha",
-			});
+        return fail(400, { name, error: `${m.whole_due_skunk_tap()} work in progress`});
 
         return { success: true };
 	},
-} satisfies Action;
+} satisfies Actions;
