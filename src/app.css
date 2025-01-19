@@ -43,9 +43,9 @@ div.overlay {
 }
 
 button, a.button {
-    @apply bg-flesh-200 hover:bg-flesh-300;
+    @apply bg-flesh-200 hover:bg-flesh-300 disabled:bg-flesh-100;
     @apply text-black text-lg text-center inline-block p-2;
-    @apply transition-transform active:scale-95;
+    @apply transition-transform active:scale-95 disabled:active:scale-100;
 }
 
 button.wide, a.button.wide {
