@@ -8,7 +8,7 @@ body, html {
 }
 
 body {
-    background-color: var(--sage);
+    @apply bg-sage-100;
     font-family: "Enriqueta", serif;
     font-weight: 400;
     font-style: normal;
@@ -40,4 +40,22 @@ div.overlay {
 .icon {
     display: inline-block;
     vertical-align: -0.25em;
+}
+
+button, a.button {
+    @apply bg-flesh-200 hover:bg-flesh-300;
+    @apply text-black text-lg text-center inline-block p-2;
+    @apply transition-transform active:scale-95;
+}
+
+button.wide, a.button.wide {
+    @apply w-full;
+}
+
+button.big, a.button.big {
+    @apply p-4 text-2xl;
+}
+
+button.secondary, a.button.secondary {
+    @apply bg-gray-100 hover:bg-gray-200;
 }
