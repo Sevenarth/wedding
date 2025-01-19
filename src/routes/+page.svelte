@@ -35,7 +35,9 @@
             data-current={current === i ? "true" : undefined}
         >
             <div class="flex items-center justify-center w-5/6 md:w-1/2 lg:w-1/3 max-w-2xl min-h-64 min-w-64 max-h-full">
-                <img src={entry.image} alt={entry.alt} class={`object-cover aspect-square bg-white shadow-xl p-5 pb-10 md:p-6 md:pb-12 origin-center transition-transform duration-300 ${pictureRotations[i % pictureRotations.length]}`} class:scale-90={current !== i} />
+                <div class={`bg-white shadow-xl p-5 pb-10 md:p-6 md:pb-12 origin-center transition-transform duration-300 grow z-20 ${pictureRotations[i % pictureRotations.length]}`} class:scale-90={current !== i}>
+                    <img src={entry.image} alt={entry.alt} class="object-cover aspect-square bg-black" />
+                </div>
             </div>
             <div class:border-b-2={i < story.length-1} class="max-w-prose mx-8 mt-8 md:my-8 pb-4 md:w-1/3 flex flex-col space-around justify-center border-green-800 md:border-b-2">
                 <h2 class="text-4xl sm:text-5xl text-black">{entry.title}</h2>
