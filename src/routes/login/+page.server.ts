@@ -48,6 +48,8 @@ export const actions = {
 
         return fail(400, { name, error: `${m.whole_due_skunk_tap()} work in progress`});
 
-        return { success: true };
+        if (name && accessCode) {
+            return { success: true };
+        }
 	},
 } satisfies Actions;
