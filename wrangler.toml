@@ -59,15 +59,16 @@ pages_build_output_dir = ".svelte-kit/cloudflare"
 # When using environment-specific overrides for bindings, ALL bindings must be specified on a per-environment basis.
 # Docs: https://developers.cloudflare.com/pages/functions/wrangler-configuration#environment-specific-overrides
 
+[[d1_databases]]
+binding = "DB"
+database_name = "wedding"
+preview_database_id = "b623f59a-f4e5-4e84-ab69-b1ba4f8fe391"
+database_id = "04405ea9-7c8c-46d3-9630-81d0c8a9103d"
+
 ######## PREVIEW environment config ########
 
 [env.preview.vars]
 PUBLIC_TURNSTILE_KEY = "1x00000000000000000000BB"
-
-[[env.preview.d1_databases]]
-binding = "DB"
-database_name = "wedding-preview"
-database_id = "b623f59a-f4e5-4e84-ab69-b1ba4f8fe391"
 
 # [[env.preview.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
@@ -77,11 +78,6 @@ database_id = "b623f59a-f4e5-4e84-ab69-b1ba4f8fe391"
 
 [env.production.vars]
 PUBLIC_TURNSTILE_KEY = "0x4AAAAAAA4ujg8NDS2aI57_"
-
-[[env.production.d1_databases]]
-binding = "DB"
-database_name = "wedding"
-database_id = "04405ea9-7c8c-46d3-9630-81d0c8a9103d"
 
 # [[env.production.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
