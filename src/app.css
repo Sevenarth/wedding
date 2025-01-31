@@ -43,9 +43,10 @@ div.overlay {
 }
 
 button, a.button {
-    @apply bg-flesh-200 hover:bg-flesh-300 disabled:bg-flesh-100;
+    @apply bg-flesh-200 hover:bg-flesh-300 focus:bg-flesh-300 disabled:bg-flesh-100;
     @apply text-black text-lg text-center inline-block p-2;
     @apply transition-transform active:scale-95 disabled:active:scale-100;
+    @apply focus:outline-none;
 }
 
 button.wide, a.button.wide {
@@ -57,5 +58,5 @@ button.big, a.button.big {
 }
 
 button.secondary, a.button.secondary {
-    @apply bg-gray-100 hover:bg-gray-200;
+    @apply bg-gray-100 hover:bg-gray-200 focus:bg-gray-200;
 }

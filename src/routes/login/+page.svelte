@@ -24,7 +24,7 @@
         <h3>Have you received the invitation in the post?</h3>
         <p>Your code is your post code as written on your envelope.</p>
         <img src={addressedEnvelope} alt="Addressed envelope" class="object-contain h-32 mx-auto" />
-        <a href="#/" class="button secondary wide">Close</a>
+        <a href="#/" class="button secondary wide" tabindex="0">Close</a>
     </div>
 </section>
 
@@ -43,19 +43,19 @@
                 <div class="flex flex-col text-left mb-4 md:mb-6">
                     <label for="access-code">Your access code</label>
                     <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder="e.g. 1234" />
-                    <a href="#where-is-my-code" class="text-lg"><Help class="icon" /> <span class="underline">Where is my code?</span></a>
+                    <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon" /> <span class="underline">Where is my code?</span></a>
                 </div>
                 <Turnstile {siteKey} size="invisible" on:callback={() => { ready = true }} />
             </div>
             <div class="flex flex-col mb-8">
-                <button class="mb-4 big" disabled={!ready}>
+                <button tabindex="0" class="mb-4 big" disabled={!ready}>
                     {#if !ready}
-                        <Loader class="icon text-2xl animate-spin" />
+                        <Loader class="icon text-2xl animate-spin" /> Please wait
                     {:else}
                         Enter
                     {/if}
                 </button>
-                <a href="/" class="button secondary">
+                <a href="/" class="button secondary" tabindex="0">
                     <ChevronLeft class="icon" /> Return to the homepage
                 </a>
             </div>
