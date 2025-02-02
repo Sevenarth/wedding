@@ -11,9 +11,27 @@
     import { Turnstile } from "svelte-turnstile";
 	import type { PageData, ActionData } from './$types';
 
-    let ready = $state(false);
+	let { form }: { data: PageData, form: ActionData } = $props();
 
-	let { data, form }: { data: PageData, form: ActionData } = $props();
+    let name = $state(form?.name ?? "");
+    let accessCode = $state();
+
+    let formEl: HTMLFormElement | undefined = $state();
+    let turnstileReady = $state(false);
+    let submitting = $state(false);
+
+    let onsubmit = (e: Event) => {
+        if (!turnstileReady) {
+            e.preventDefault();
+        }
+        submitting = true;
+    }
+
+    $effect(() => {
+        if(turnstileReady && submitting) {
+            formEl?.submit();
+        }
+    })
 </script>
 
 <section id="where-is-my-code">
@@ -33,24 +51,24 @@
     <div class="overlay w-full min-h-dvh flex flex-col justify-between items-center pt-12 px-8 z-[2] text-xl md:text-2xl">
         <Header coloured />
         <h2 class="text-5xl mb-6">Your invitation</h2>
-        <form method="post" class="grow flex flex-col w-full max-w-sm text-black">
+        <form bind:this={formEl} method="post" class="grow flex flex-col w-full max-w-sm text-black" {onsubmit}>
             <div>
                 {#if form?.error}<div class="bg-white/50 border-l-4 border-red-600 p-2 text-lg mb-4 md:mb-6">{form.error}</div>{/if}
                 <div class="flex flex-col text-left mb-4 md:mb-6">
                     <label for="name">Your name</label>
-                    <input type="text" id="name" name="name" value={form?.name ?? ""} autocomplete="given-name" placeholder="e.g. John" />
+                    <input type="text" id="name" name="name" bind:value={name} autocomplete="given-name" placeholder="e.g. John" />
                 </div>
                 <div class="flex flex-col text-left mb-4 md:mb-6">
                     <label for="access-code">Your access code</label>
-                    <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder="e.g. 1234" />
+                    <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder="e.g. 1234" bind:value={accessCode} />
                     <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon" /> <span class="underline">Where is my code?</span></a>
                 </div>
-                <Turnstile {siteKey} size="invisible" on:callback={() => { ready = true }} />
+                <Turnstile {siteKey} size="invisible" on:callback={() => { turnstileReady = true }} />
             </div>
             <div class="flex flex-col mb-8">
-                <button tabindex="0" class="mb-4 big" disabled={!ready}>
-                    {#if !ready}
-                        <Loader class="icon text-2xl animate-spin" /> Please wait
+                <button tabindex="0" class="mb-4 big" disabled={submitting}>
+                    {#if submitting}
+                        <Loader class="icon text-2xl animate-spin" />
                     {:else}
                         Enter
                     {/if}
@@ -64,7 +82,7 @@
 </section>
 
 <style>
-input[type="text"] {
+input {
     @apply focus:ring-green-900 focus:border-green-900 text-xl p-3 md:p-2;
 }
 

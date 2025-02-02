@@ -2,6 +2,7 @@ import { SECRET_TURNSTILE_KEY as SECRET_KEY } from "$env/static/private";
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types.js";
 import * as m from "$paraglide/messages";
+import prisma from "$lib/prisma.js";
 
 interface TokenValidationResponse {
 	success: boolean;
@@ -18,7 +19,6 @@ async function validateToken(request: Request, token: FormDataEntryValue): Promi
     formData.append("secret", SECRET_KEY);
     formData.append("response", token);
     formData.append("remoteip", request.headers.get("CF-Connecting-IP") || "");
-    console.log(formData)
 
 	const validationRequest = await fetch(TURNSTILE_VERIFY_URL, {
         method: 'POST',
@@ -31,12 +31,11 @@ async function validateToken(request: Request, token: FormDataEntryValue): Promi
 }
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, platform }) => {
 		const data = await request.formData();
-        const name = data.get("name");
-        const accessCode = data.get("access-code");
+        const name = data.get("name")?.toString().trim();
+        const accessCode = data.get("access-code")?.toString().trim();
 		const token = data.get("cf-turnstile-response");
-        console.log(name, data)
 
         if (!token)
             return fail(400, { name, error: `${m.whole_due_skunk_tap()} missing-captcha` });
@@ -46,10 +45,22 @@ export const actions = {
 			return fail(400, { name, error: `${m.whole_due_skunk_tap()} ${error} `});
         }
 
-        return fail(400, { name, error: `${m.whole_due_skunk_tap()} work in progress`});
-
         if (name && accessCode) {
-            return { success: true };
+            const user = await prisma(platform).login.findUnique({
+                where: {
+                    accessCode_name: {
+                        accessCode: accessCode.replace(" ", "").toLowerCase(),
+                        name: name.toLowerCase()
+                    }
+                }
+            });
+
+            if (user) {
+                console.log(user)
+                return { success: true };
+            }
         }
+
+        return fail(400, { name, error: m.free_agent_florian_heal()});
 	},
 } satisfies Actions;
