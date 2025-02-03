@@ -1,8 +1,15 @@
 import { SECRET_TURNSTILE_KEY as SECRET_KEY } from "$env/static/private";
-import { fail } from "@sveltejs/kit";
-import type { Actions } from "./$types.js";
+import { fail, redirect } from "@sveltejs/kit";
+import type { Actions, PageServerLoad } from "./$types";
 import * as m from "$paraglide/messages";
-import prisma from "$lib/prisma.js";
+import prisma from "$lib/prisma.server";
+import { authenticateUser } from "$lib/auth.server";
+
+export const load: PageServerLoad = async ({ locals }) => {
+	if (locals.user) {
+		redirect(307, '/rsvp');
+	}
+};
 
 interface TokenValidationResponse {
 	success: boolean;
@@ -31,7 +38,7 @@ async function validateToken(request: Request, token: FormDataEntryValue): Promi
 }
 
 export const actions = {
-	default: async ({ request, platform }) => {
+	default: async ({ request, platform, cookies }) => {
 		const data = await request.formData();
         const name = data.get("name")?.toString().trim();
         const accessCode = data.get("access-code")?.toString().trim();
@@ -56,8 +63,8 @@ export const actions = {
             });
 
             if (user) {
-                console.log(user)
-                return { success: true };
+                await authenticateUser(user.displayName ?? user.name, cookies)
+		        redirect(303, '/rsvp');
             }
         }
 

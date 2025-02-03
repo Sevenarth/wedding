@@ -1,5 +1,6 @@
 import type { Handle } from "@sveltejs/kit";
 import { setLanguageTag, sourceLanguageTag, type AvailableLanguageTag } from "$paraglide/runtime";
+import { getUser } from "$lib/auth.server";
 
 const hostnamesToLocale: Record<string, AvailableLanguageTag> = {
     "wedding.vizzar.ro": "en",
@@ -13,7 +14,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     setLanguageTag(locale);
 
+    event.locals.user = await getUser(event.cookies)
+
     return resolve(event, {
-        transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+        transformPageChunk: ({ html }) => html.replace('%lang%', locale),
     });
 }

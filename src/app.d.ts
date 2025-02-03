@@ -9,6 +9,10 @@ declare global {
             cf: CfProperties
             ctx: ExecutionContext
         }
+
+        interface Locals {
+            user: string | null
+        }
     }
 }
 
