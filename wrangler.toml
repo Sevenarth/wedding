@@ -71,6 +71,11 @@ database_id = "04405ea9-7c8c-46d3-9630-81d0c8a9103d"
 PUBLIC_TURNSTILE_KEY = "1x00000000000000000000BB"
 PUBLIC_EXPIRATION_INTERVAL = "1 hour"
 
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "wedding-preview"
+database_id = "b623f59a-f4e5-4e84-ab69-b1ba4f8fe391"
+
 # [[env.preview.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "<PREVIEW_NAMESPACE_ID>"
@@ -80,6 +85,11 @@ PUBLIC_EXPIRATION_INTERVAL = "1 hour"
 [env.production.vars]
 PUBLIC_TURNSTILE_KEY = "0x4AAAAAAA4ujg8NDS2aI57_"
 PUBLIC_EXPIRATION_INTERVAL = "1 week"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "wedding"
+database_id = "04405ea9-7c8c-46d3-9630-81d0c8a9103d"
 
 # [[env.production.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
