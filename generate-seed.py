@@ -75,9 +75,9 @@ for invite in invites:
     for name, displayName in loginNames.items():
         displayName = f"'{displayName}'" if displayName else "null"
         sql.append(f"INSERT INTO logins(accessCode, name, displayName, inviteId) VALUES ('{accessCode}', '{name}', {displayName}, '{inviteId}')")
-    for person in people:
-        sql.append(f"INSERT INTO persons(name, inviteId) VALUES('{person}', '{inviteId}')")
     for location in locations:
         sql.append(f"INSERT INTO responses(location, inviteId) VALUES ('{location}', '{inviteId}')")
+        for person in people:
+            sql.append(f"INSERT INTO persons(name, location, inviteId) VALUES('{person}', '{location}', '{inviteId}')")
 
 print(";\n".join(sql))

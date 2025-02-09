@@ -20,20 +20,6 @@ CREATE TABLE "logins" (
 );
 
 -- CreateTable
-CREATE TABLE "persons" (
-    "name" TEXT NOT NULL,
-    "menuPreference" TEXT NOT NULL DEFAULT 'Fish',
-    "dietaryRequirement" TEXT,
-    "allergies" TEXT,
-    "inviteId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    PRIMARY KEY ("inviteId", "name"),
-    CONSTRAINT "persons_inviteId_fkey" FOREIGN KEY ("inviteId") REFERENCES "invites" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
--- CreateTable
 CREATE TABLE "responses" (
     "location" TEXT NOT NULL,
     "inviteId" TEXT NOT NULL,
@@ -43,4 +29,19 @@ CREATE TABLE "responses" (
 
     PRIMARY KEY ("inviteId", "location"),
     CONSTRAINT "responses_inviteId_fkey" FOREIGN KEY ("inviteId") REFERENCES "invites" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "persons" (
+    "name" TEXT NOT NULL,
+    "menuPreference" TEXT NOT NULL DEFAULT 'Fish',
+    "dietaryRequirement" TEXT,
+    "allergies" TEXT,
+    "inviteId" TEXT NOT NULL,
+    "location" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY ("inviteId", "location", "name"),
+    CONSTRAINT "persons_inviteId_location_fkey" FOREIGN KEY ("inviteId", "location") REFERENCES "responses" ("inviteId", "location") ON DELETE RESTRICT ON UPDATE CASCADE
 );

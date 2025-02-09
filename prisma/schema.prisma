@@ -18,7 +18,6 @@ model Invite {
   phoneNumber String?
 
   responses Response[]
-  persons Person[]
   logins Login[]
   
   createdAt DateTime @default(now())
@@ -45,23 +44,6 @@ enum Menu {
   Kids
 }
 
-model Person {
-  name String
-
-  menuPreference Menu @default(Fish)
-  dietaryRequirement String?
-  allergies String?
-
-  invite Invite @relation(fields: [inviteId], references: [id])
-  inviteId String
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-
-  @@id([inviteId, name])
-  @@map("persons")
-}
-
 enum Location {
   Italy
   Romania
@@ -81,10 +63,29 @@ model Response {
   inviteId String
 
   givenResponse ResponseType @default(NoResponse)
+  persons Person[]
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 
   @@id ([inviteId, location])
   @@map ("responses")
+}
+
+model Person {
+  name String
+
+  menuPreference Menu @default(Fish)
+  dietaryRequirement String?
+  allergies String?
+
+  response Response @relation(fields: [inviteId, location], references: [inviteId, location])
+  inviteId String
+  location Location
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@id([inviteId, location, name])
+  @@map("persons")
 }
