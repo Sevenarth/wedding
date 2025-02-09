@@ -1,4 +1,16 @@
-<footer class="container mx-auto border-t border-green-800 mt-5 mx-8 p-6 flex flex-col md:flex-row justify-between text-gray-700">
+<script>
+	import GithubLogo from "~icons/tabler/brand-github";
+</script>
+
+<footer>
 	<p>Made with ❤️ by your groom.</p>
-	<p>View on <a href="https://github.com/Sevenarth/wedding" target="_blank">GitHub</a></p>
+	<a href="https://github.com/Sevenarth/wedding" target="_blank">View on <GithubLogo class="icon" /></a>
 </footer>
+
+<style>
+footer {
+	@apply border-t border-green-900/20 pt-4 px-4;
+	@apply flex flex-row justify-between items-center;
+	@apply text-gray-800;
+}
+</style>

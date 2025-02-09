@@ -6,7 +6,7 @@
 
     const anagramSrc = coloured ? anagramGreen : anagramBlack;
     const width = big ? "w-24 md:w-36" : (small ? "w-16" : "w-16 md:w-36");
-    const margin = big ? "mb-8" : "mb-2 md:mb-4"
+    const margin = big ? "mb-8" : (small ? "mb-2" : "mb-2 md:mb-4");
 </script>
 
 <header class={`flex w-full justify-center ${margin}`}>

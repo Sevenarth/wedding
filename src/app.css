@@ -8,7 +8,7 @@ body, html {
 }
 
 body {
-    @apply bg-sage-100;
+    @apply bg-sage-100 p-4;
     font-family: "Enriqueta", serif;
     font-weight: 400;
     font-style: normal;
@@ -19,6 +19,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Style Script", serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.text-body {
+    font-family: "Enriqueta", serif;
 }
 
 h1 {
@@ -42,21 +46,95 @@ div.overlay {
     vertical-align: -0.25em;
 }
 
-button, a.button {
-    @apply bg-flesh-200 hover:bg-flesh-300 focus:bg-flesh-300 disabled:bg-flesh-100;
+a:not(.button) {
+    @apply underline;
+}
+
+button, .button {
+    @apply bg-flesh-200 hover:bg-flesh-300 focus:bg-flesh-300 disabled:bg-flesh-200;
     @apply text-black text-lg text-center inline-block p-2;
     @apply transition-transform active:scale-95 disabled:active:scale-100;
     @apply focus:outline-none;
+    @apply disabled:opacity-40;
+    @apply cursor-pointer;
 }
 
-button.wide, a.button.wide {
+button.faded, .button.faded {
+    @apply opacity-40;
+}
+
+button.wide, .button.wide {
     @apply w-full;
 }
 
-button.big, a.button.big {
+button.big, .button.big {
     @apply p-4 text-2xl;
 }
 
-button.secondary, a.button.secondary {
-    @apply bg-gray-100 hover:bg-gray-200 focus:bg-gray-200;
+button.secondary, .button.secondary {
+    @apply bg-gray-100 hover:bg-gray-200 disabled:bg-gray-100 focus:bg-gray-200;
+}
+
+button.red, .button.red {
+    @apply bg-red-400 hover:bg-red-500 disabled:bg-red-400 focus:bg-red-500;
+}
+
+button.green, .button.green {
+    @apply bg-green-400 hover:bg-green-500 disabled:bg-green-400 focus:bg-green-500;
+}
+
+button.amber, .button.amber {
+    @apply bg-amber-300 hover:bg-amber-400 disabled:bg-amber-300 focus:bg-amber-400;
+}
+
+label.button:has(input[type="radio"]) {
+    @apply relative
+}
+
+label.button:has(input[type="radio"]:valid:not(:checked):not(:hover)) {
+    @apply opacity-40
+}
+
+
+label.button.red:has(input[type="radio"]:checked) {
+    @apply bg-red-500;
+}
+
+label.button.green:has(input[type="radio"]:checked) {
+    @apply bg-green-500;
+}
+
+label.button.amber:has(input[type="radio"]:checked) {
+    @apply bg-amber-400;
+}
+
+label.button > input[type="radio"] {
+    @apply absolute bg-transparent appearance-none border-0 w-1 h-1 opacity-0 top-[50%] left-[50%];
+}
+
+header, footer, section#main {
+    @apply mx-auto max-w-screen-lg;
+}
+
+p {
+    @apply my-2;
+}
+
+.notice {
+    @apply border-l-4 p-2 text-lg bg-white/50;
+}
+
+.notice.warning {
+    @apply text-yellow-600 border-yellow-600;
+}
+.notice.error {
+    @apply border-red-600 text-red-600
+}
+
+.notice.small {
+    @apply text-base border-l-2 p-0 pl-2;
+}
+
+input[type="text"], input[type="tel"], input[type="email"], input[type="password"] {
+    @apply focus:ring-green-900 focus:border-green-900;
 }
