@@ -1,37 +1,39 @@
 <script lang="ts">
-    import ChevronLeft from "~icons/tabler/chevron-left";
-    import Help from "~icons/tabler/help";
-    import Loader from "~icons/tabler/loader-2";
-    import { PUBLIC_TURNSTILE_KEY as siteKey } from "$env/static/public";
-    import * as m from "$paraglide/messages";
-    import coralPeonies from "$lib/assets/coral-peonies.png";
-    import personalEnvelope from "$lib/assets/personal-envelope.png";
-    import addressedEnvelope from "$lib/assets/addressed-envelope.png";
-    import Header from "$lib/Header.svelte";
-    import { Turnstile } from "svelte-turnstile";
-	import type { PageData, ActionData } from './$types';
+import ChevronLeft from "~icons/tabler/chevron-left";
+import Help from "~icons/tabler/help";
+import Loader from "~icons/tabler/loader-2";
+import { PUBLIC_TURNSTILE_KEY as siteKey } from "$env/static/public";
+import * as m from "$paraglide/messages";
+import { page } from '$app/state';
+import coralPeonies from "$lib/assets/coral-peonies.png";
+import personalEnvelope from "$lib/assets/personal-envelope.png";
+import addressedEnvelope from "$lib/assets/addressed-envelope.png";
+import Header from "$lib/Header.svelte";
+import { Turnstile } from "svelte-turnstile";
+import type { PageData, ActionData } from './$types';
 
-	let { form }: { data: PageData, form: ActionData } = $props();
+let { form }: { data: PageData, form: ActionData } = $props();
+const redirectTo = page.url.searchParams.get("from");
 
-    let name = $state(form?.name ?? "");
-    let accessCode = $state();
+let name = $state(form?.name ?? "");
+let accessCode = $state();
 
-    let formEl: HTMLFormElement | undefined = $state();
-    let turnstileReady = $state(false);
-    let submitting = $state(false);
+let formEl: HTMLFormElement | undefined = $state();
+let turnstileReady = $state(false);
+let submitting = $state(false);
 
-    let onsubmit = (e: Event) => {
-        if (!turnstileReady) {
-            e.preventDefault();
-        }
-        submitting = true;
+let onsubmit = (e: Event) => {
+    if (!turnstileReady) {
+        e.preventDefault();
     }
+    submitting = true;
+}
 
-    $effect(() => {
-        if(turnstileReady && submitting) {
-            formEl?.submit();
-        }
-    })
+$effect(() => {
+    if(turnstileReady && submitting) {
+        formEl?.submit();
+    }
+})
 </script>
 
 <section id="where-is-my-code">
@@ -54,6 +56,7 @@
         <form bind:this={formEl} method="post" class="grow flex flex-col w-full max-w-sm text-black" {onsubmit}>
             <div class="inputs">
                 {#if form?.error}<div class="notice error">{form.error}</div>{/if}
+                {#if redirectTo}<div class="notice">You need to login before continuing.</div>{/if}
                 <div class="flex flex-col text-left">
                     <label for="name">Your name</label>
                     <input type="text" id="name" name="name" bind:value={name} autocomplete="given-name" placeholder="e.g. John" />

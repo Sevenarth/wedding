@@ -38,7 +38,15 @@ async function validateToken(request: Request, token: FormDataEntryValue): Promi
 }
 
 export const actions = {
-	default: async ({ request, platform, cookies }) => {
+	default: async ({ request, platform, cookies, url }) => {
+        const fromPath = url.searchParams.get("from")
+        const referer = request.headers.get("referer");
+        if (fromPath && referer) {
+            const refererUrl = new URL(referer);
+            if (refererUrl.pathname !== url.pathname)
+                return
+        }
+
 		const data = await request.formData();
         const name = data.get("name")?.toString().trim();
         const accessCode = data.get("access-code")?.toString().trim();
@@ -63,7 +71,11 @@ export const actions = {
             });
 
             if (user) {
-                await authenticateUser(user.displayName ?? user.name, cookies)
+                await authenticateUser(user.displayName ?? user.name, user.inviteId, cookies)
+                if (fromPath && fromPath.startsWith("/")) {
+                    redirect(303, fromPath);
+                }
+
 		        redirect(303, '/rsvp');
             }
         }

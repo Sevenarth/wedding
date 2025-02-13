@@ -1,5 +1,7 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
+import { type User } from "$lib/auth"
+
 declare global {
 	namespace App {
         interface Platform {
@@ -11,7 +13,7 @@ declare global {
         }
 
         interface Locals {
-            user: string | null
+            user: User | null
         }
     }
 }

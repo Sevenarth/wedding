@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     setLanguageTag(locale);
 
-    event.locals.user = await getUser(event.cookies)
+    event.locals.user = await getUser(event.cookies, event.platform)
 
     return resolve(event, {
         transformPageChunk: ({ html }) => html.replace('%lang%', locale),

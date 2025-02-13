@@ -1,17 +1,20 @@
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
 import { SECRET_JWT_KEY } from "$env/static/private";
 import { PUBLIC_EXPIRATION_INTERVAL } from "$env/static/public";
-import type { Cookies } from '@sveltejs/kit';
+import { redirect, type Cookies } from '@sveltejs/kit';
+import prisma from '$lib/prisma.server';
+import type { User } from '$lib/auth';
 
 
 const COOKIE_NAME =  "auth.jwt";
 
 const secret = new TextEncoder().encode(SECRET_JWT_KEY);
 
-type Payload = JWTPayload & { name: string }
+type Payload = JWTPayload & { name: string, inviteId: string }
 
-async function generateJWT(name: string): Promise<string> {
-    return new SignJWT({ name })
+
+async function generateJWT(name: string, inviteId: string): Promise<string> {
+    return new SignJWT({ name, inviteId })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
         .setExpirationTime(PUBLIC_EXPIRATION_INTERVAL)
@@ -27,12 +30,12 @@ async function verifyJWT(token: string): Promise<Payload | null> {
     }
 }
 
-export async function authenticateUser(name: string, cookies: Cookies): Promise<void> {
-    const jwt = await generateJWT(name);
+export async function authenticateUser(name: string, inviteId: string, cookies: Cookies): Promise<void> {
+    const jwt = await generateJWT(name, inviteId);
     cookies.set(COOKIE_NAME, jwt, { path: "/" })
 }
 
-export async function getUser(cookies: Cookies): Promise<string| null> {
+export async function getUser(cookies: Cookies, platform: App.Platform | undefined): Promise<User | null> {
     const jwt = cookies.get(COOKIE_NAME);
     if (!jwt) {
         return null
@@ -44,5 +47,21 @@ export async function getUser(cookies: Cookies): Promise<string| null> {
         return null
     }
 
-    return payload.name
+    const invite = await prisma(platform).invite.findUnique({
+        where: { id: payload.inviteId }
+    })
+    if (!invite) {
+        cookies.delete(COOKIE_NAME, { path: "/" });
+        return null
+    }
+
+
+    return { name: payload.name, invite }
+}
+
+export function requireUser(locals: App.Locals, url: URL): User {
+    if (!locals.user) {
+        redirect(307, '/auth?from=' + url.pathname);
+    }
+    return locals.user
 }
