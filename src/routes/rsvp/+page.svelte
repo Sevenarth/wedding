@@ -2,22 +2,30 @@
 import ContactsForm from "$lib/ContactsForm.svelte";
 import RsvpForm from "$lib/RsvpForm.svelte";
 import Timeline from "$lib/Timeline.svelte";
-import type { PageData } from "./$types";
+import type { ActionData, PageData } from "./$types";
 
-let { data }: { data: PageData } = $props();
+let { data, form }: { data: PageData, form: ActionData } = $props();
+
+const { user: {name, invite}, responses } = data;
+const romania = responses.find(r => r.location === "Romania");
+const italy = responses.find(r => r.location === "Italy");
 </script>
 
-<h1>Hello {data.user},</h1>
+<h1>Hello {name},</h1>
 <p>Welcome to your reserved area! Please find the wedding timeline, information and the form to RSVP.</p>
 <div class="split">
 	<main>
-		<RsvpForm location="Bucharest, Romania" deadline={new Date(2025, 4, 1)} />
-		<RsvpForm location="Puglia, Italy" deadline={new Date(2025, 4, 15)} />
-		<ContactsForm />
+		{#if romania}
+		<RsvpForm response={romania} location="Bucharest, Romania" deadline={new Date(2025, 4, 1)} />
+		{/if}
+		{#if italy}
+		<RsvpForm response={italy} location="Puglia, Italy" deadline={new Date(2025, 4, 15)} />
+		{/if}
+		<ContactsForm invite={form?.invite ?? invite} updated={!!form?.invite} />
 	</main>
 	<aside>
 		<h2>Timeline</h2>
-		<Timeline italy romania />
+		<Timeline italy={!!italy} romania={!!romania} />
 	</aside>
 </div>
 
@@ -27,10 +35,10 @@ div.split {
 }
 
 div.split main {
-	@apply grow;
+	@apply basis-2/3;
 }
 
 div.split aside {
-	/* @apply md:w-1/3; */
+	@apply basis-1/3;
 }
 </style>
