@@ -130,6 +130,9 @@ p {
 .notice.error {
     @apply border-red-600 text-red-600
 }
+.notice.success {
+    @apply border-green-600 text-green-600;
+}
 
 .notice.small {
     @apply text-base border-l-2 p-0 pl-2;
