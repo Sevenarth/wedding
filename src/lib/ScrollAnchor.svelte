@@ -13,7 +13,6 @@
     const onclick: MouseEventHandler<HTMLAnchorElement> = (e) => {
         e.preventDefault();
         const targetAnchor = e.currentTarget.dataset.target;
-        console.log(targetAnchor);
         if(targetAnchor) {
             const el = document.getElementById(targetAnchor);
             if (!el) {
