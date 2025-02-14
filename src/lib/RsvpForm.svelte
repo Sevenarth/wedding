@@ -1,11 +1,13 @@
 <script lang="ts">
+import Loader from "~icons/tabler/loader-2";
 import MinusIcon from "~icons/tabler/minus";
 import PlusIcon from "~icons/tabler/plus";
 import XIcon from "~icons/tabler/x";
 import QuestionIcon from "~icons/tabler/question-mark";
 import CheckIcon from "~icons/tabler/check";
 import SadIcon from "~icons/tabler/mood-sad";
-import { ResponseType, type ResponseGetPayload } from "@prisma/client";
+import { ResponseType, Location, type ResponseGetPayload } from "@prisma/client";
+	import { enhance } from "$app/forms";
 
 type ResponseWithPeople = ResponseGetPayload<{
     include: {
@@ -16,13 +18,14 @@ type ResponseWithPeople = ResponseGetPayload<{
 const MIN_GUESTS = 1;
 const MAX_GUESTS = 5;
 
-const { location, deadline, response }: { location: string, deadline: Date, response: ResponseWithPeople } = $props();
+const { location, deadline, response, error = null }: { location: Location, deadline: Date, response: ResponseWithPeople, error: string | null } = $props();
 
 let editing = $state(false);
 
 let givenResponse: ResponseType = $state(response.givenResponse)
 let coming = $derived(givenResponse !== ResponseType.Declined && givenResponse !== ResponseType.NoResponse)
 let guests = $state(response.persons.length);
+let submitting = $state(false);
 
 type ButtonEvent = Event & { currentTarget: EventTarget & HTMLButtonElement };
 
@@ -43,9 +46,26 @@ const addGuest = (e: ButtonEvent) => {
 }
 </script>
 
-<form class="box">
-    <h1>{location}</h1>
+<form class="box" action="?/rsvp" method="post" use:enhance={() => {
+    submitting = true;
+    return async ({ update, result }) => {
+        if (result.type === "success") {
+            editing = false;
+        }
+
+        submitting = false;
+        update({ reset: false });
+    };
+  }}>
+    <h1>
+        {#if location === Location.Italy}
+        Puglia, Italy
+        {:else if location === Location.Romania}
+        Bucharest, Romania
+        {/if}
+    </h1>
     {#if (response.givenResponse === ResponseType.NoResponse || editing) && deadline > new Date()}
+        {#if error}<div class="notice error small">An error has occurred while submitting your response ({error}), please try again or reach out to us.</div>{/if}
         <p>Will you be able to join us?</p>
         <div class="notice small"><span class="font-semibold">Note that</span> you will be able to change your reply by <time class="italic">{deadline.toDateString()}</time>. But if none will be provided by then, your response will be automatically set to no. If you give us <a href="#contact-details">your contact details</a>, we'll send you reminders.</div>
         <div class="flex justify-around gap-2">
@@ -74,8 +94,15 @@ const addGuest = (e: ButtonEvent) => {
         </div>
         {/if}
         {#if guests == MAX_GUESTS}<div class="notice warning small">If you are going to be more than {guests}, please reach out to us.</div>{/if}
+        <input type="hidden" name="location" value={location} />
         <input type="hidden" name="guests" bind:value={guests} />
-        <button type="submit" class="wide">Submit response</button>
+        <button type="submit" class="wide">
+            {#if submitting}
+            <Loader class="icon text-2xl animate-spin" />
+            {:else}
+            Submit response
+            {/if}
+        </button>
     {:else}
         <div class="text-center text-lg">
             <p>

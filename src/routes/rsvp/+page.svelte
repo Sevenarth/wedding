@@ -4,12 +4,15 @@ import ContactsForm from "$lib/ContactsForm.svelte";
 import RsvpForm from "$lib/RsvpForm.svelte";
 import Timeline from "$lib/Timeline.svelte";
 import type { ActionData, PageData } from "./$types";
+import { Location } from "@prisma/client";
 
 let { data, form }: { data: PageData, form: ActionData } = $props();
 
 const { user: {name, invite}, responses } = data;
-const romania = responses.find(r => r.location === "Romania");
-const italy = responses.find(r => r.location === "Italy");
+const romania = $derived(form?.response?.location === Location.Romania ? form.response : responses.find(r => r.location === "Romania"))
+const italy = $derived(form?.response?.location === Location.Italy ? form.response : responses.find(r => r.location === "Italy"))
+const romaniaError = $derived(form?.location === Location.Romania ? form?.error : null)
+const italyError = $derived(form?.location === Location.Italy ? form?.error : null)
 </script>
 
 <h1>Hello {name},</h1>
@@ -17,10 +20,10 @@ const italy = responses.find(r => r.location === "Italy");
 <div class="split">
 	<main>
 		{#if romania}
-		<RsvpForm response={romania} location="Bucharest, Romania" deadline={new Date(PUBLIC_ROMANIA_DEADLINE)} />
+		<RsvpForm response={romania} location={Location.Romania} deadline={new Date(PUBLIC_ROMANIA_DEADLINE)} error={romaniaError} />
 		{/if}
 		{#if italy}
-		<RsvpForm response={italy} location="Puglia, Italy" deadline={new Date(PUBLIC_ITALY_DEADLINE)} />
+		<RsvpForm response={italy} location={Location.Italy} deadline={new Date(PUBLIC_ITALY_DEADLINE)} error={italyError} />
 		{/if}
 		<ContactsForm invite={form?.invite ?? invite} updated={!!form?.invite} />
 	</main>
