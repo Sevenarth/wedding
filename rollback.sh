@@ -16,10 +16,6 @@ case ${1:-local} in
         ;;
 esac
 
-npx wrangler d1 migrations create DB create_tables
+rm -rf ./migrations
 
-npx prisma generate
-
-npx prisma migrate diff --from-empty --to-schema-datamodel ./prisma/schema.prisma --script --output migrations/0001_create_tables.sql
-
-npx wrangler d1 migrations apply $D1_DB
+npx wrangler d1 execute $D1_DB --command "drop table persons; drop table responses; drop table logins; drop table invites; delete from d1_migrations"

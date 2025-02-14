@@ -14,6 +14,8 @@ CREATE TABLE "logins" (
     "name" TEXT NOT NULL,
     "displayName" TEXT,
     "inviteId" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY ("accessCode", "name"),
     CONSTRAINT "logins_inviteId_fkey" FOREIGN KEY ("inviteId") REFERENCES "invites" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
@@ -33,7 +35,9 @@ CREATE TABLE "responses" (
 
 -- CreateTable
 CREATE TABLE "persons" (
-    "name" TEXT NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT,
+    "orderIndex" INTEGER NOT NULL,
     "menuPreference" TEXT NOT NULL DEFAULT 'Fish',
     "dietaryRequirement" TEXT,
     "allergies" TEXT,
@@ -41,7 +45,8 @@ CREATE TABLE "persons" (
     "location" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    PRIMARY KEY ("inviteId", "location", "name"),
     CONSTRAINT "persons_inviteId_location_fkey" FOREIGN KEY ("inviteId", "location") REFERENCES "responses" ("inviteId", "location") ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE INDEX "persons_inviteId_location_idx" ON "persons"("inviteId", "location");

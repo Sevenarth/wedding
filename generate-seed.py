@@ -82,8 +82,9 @@ for invite in invites:
     for location in locations:
         sql.append("INSERT INTO responses(location, inviteId, createdAt, updatedAt) "
                    f"VALUES ('{location}', '{inviteId}', '{now}', '{now}')")
-        for person in people:
-            sql.append("INSERT INTO persons(name, location, inviteId, createdAt, updatedAt) "
-                       f"VALUES('{person}', '{location}', '{inviteId}', '{now}', '{now}')")
+        for i, person in enumerate(people):
+            id = generate_cuid()
+            sql.append("INSERT INTO persons(id, orderIndex, name, location, inviteId, createdAt, updatedAt) "
+                       f"VALUES('{id}', '{i}', '{person}', '{location}', '{inviteId}', '{now}', '{now}')")
 
 print(";\n".join(sql))
