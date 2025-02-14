@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from datetime import datetime, timezone
 from cuid2 import cuid_wrapper
 from pathlib import Path
 import csv
@@ -67,17 +68,22 @@ with open(path) as csvfile:
         ))
 
 sql = []
+now = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
 
 for invite in invites:
     accessCode, addressee, loginNames, people, locations = invite
     inviteId = generate_cuid()
-    sql.append(f"INSERT INTO invites(id, addressee) VALUES('{inviteId}', '{addressee}')")
+    sql.append("INSERT INTO invites(id, addressee, createdAt, updatedAt) "
+               f"VALUES('{inviteId}', '{addressee}', '{now}', '{now}')")
     for name, displayName in loginNames.items():
         displayName = f"'{displayName}'" if displayName else "null"
-        sql.append(f"INSERT INTO logins(accessCode, name, displayName, inviteId) VALUES ('{accessCode}', '{name}', {displayName}, '{inviteId}')")
+        sql.append("INSERT INTO logins(accessCode, name, displayName, inviteId, createdAt, updatedAt) "
+                   f"VALUES ('{accessCode}', '{name}', {displayName}, '{inviteId}', '{now}', '{now}')")
     for location in locations:
-        sql.append(f"INSERT INTO responses(location, inviteId) VALUES ('{location}', '{inviteId}')")
+        sql.append("INSERT INTO responses(location, inviteId, createdAt, updatedAt) "
+                   f"VALUES ('{location}', '{inviteId}', '{now}', '{now}')")
         for person in people:
-            sql.append(f"INSERT INTO persons(name, location, inviteId) VALUES('{person}', '{location}', '{inviteId}')")
+            sql.append("INSERT INTO persons(name, location, inviteId, createdAt, updatedAt) "
+                       f"VALUES('{person}', '{location}', '{inviteId}', '{now}', '{now}')")
 
 print(";\n".join(sql))
