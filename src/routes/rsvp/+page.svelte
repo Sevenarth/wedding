@@ -1,4 +1,5 @@
 <script lang="ts">
+import { PUBLIC_ROMANIA_DEADLINE, PUBLIC_ITALY_DEADLINE } from "$env/static/public";
 import ContactsForm from "$lib/ContactsForm.svelte";
 import RsvpForm from "$lib/RsvpForm.svelte";
 import Timeline from "$lib/Timeline.svelte";
@@ -16,10 +17,10 @@ const italy = responses.find(r => r.location === "Italy");
 <div class="split">
 	<main>
 		{#if romania}
-		<RsvpForm response={romania} location="Bucharest, Romania" deadline={new Date(2025, 4, 1, 23, 59, 59)} />
+		<RsvpForm response={romania} location="Bucharest, Romania" deadline={new Date(PUBLIC_ROMANIA_DEADLINE)} />
 		{/if}
 		{#if italy}
-		<RsvpForm response={italy} location="Puglia, Italy" deadline={new Date(2025, 4, 15, 23, 59, 59)} />
+		<RsvpForm response={italy} location="Puglia, Italy" deadline={new Date(PUBLIC_ITALY_DEADLINE)} />
 		{/if}
 		<ContactsForm invite={form?.invite ?? invite} updated={!!form?.invite} />
 	</main>
