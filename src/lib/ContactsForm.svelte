@@ -22,7 +22,7 @@ let submitting = $state(false);
     {/if}
     <div class="notice small">It is not mandatory to give us your contact details. But if you do, you'll receive updates if any. Your details won't be shared with anyone, only Luca will have access to these.</div>
     <label for="email">Email address</label>
-    <input id="email" type="email" name="emailAddress" placeholder="e.g. me@example.com" bind:value={email}  />
+    <input id="email" type="email" name="emailAddress" placeholder="e.g. me@example.com" autocomplete="email" bind:value={email}  />
     <label for="phone">Phone number</label>
     <input id="phone" type="tel" name="phoneNumber" placeholder="e.g. 07999123456" autocomplete="tel" bind:value={phone} />
     <div class="notice small">If your phone number is not British, please add an international prefix.</div>
