@@ -135,6 +135,11 @@ const addGuest = (e: ButtonEvent) => {
                 {/if}
             </p>
         </div>
+        {#if response.givenResponse !== ResponseType.Declined && response.givenResponse !== ResponseType.NoResponse}
+        <div class="notice small">
+           Closer to date you will be asked for your names, food preferences and dietary requirements. If you want to be updated, please <a href="#contact-details">provide us with your contact details</a>.
+        </div>
+        {/if}
         {#if deadline > new Date()}
         <div class="notice small" class:warning={response.givenResponse === ResponseType.Tentative}>
             {#if response.givenResponse === ResponseType.Tentative}
