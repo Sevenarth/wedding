@@ -1,5 +1,16 @@
 import { languageTag } from "$paraglide/runtime";
 
+export interface BankDetails {
+    gbpBankName: string;
+    gbpBeneficiary: string;
+    gbpSortCode: string;
+    gbpAccountNumber: string;
+    eurBankName: string;
+    eurBeneficiary: string;
+    eurIban: string;
+    lucaRevtag: string;
+    sarahRevtag: string;
+}
 
 export function intlPhoneNumber(phoneNumber: string | null): string | null {
     if (!phoneNumber)

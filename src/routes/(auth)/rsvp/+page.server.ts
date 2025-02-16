@@ -2,8 +2,9 @@ import { fail, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import prisma from "$lib/prisma.server";
 import { requireUser } from '$lib/auth.server';
-import { intlPhoneNumber } from '$lib/utils';
+import { intlPhoneNumber, type BankDetails } from '$lib/utils';
 import { Location, ResponseType } from '@prisma/client';
+import { env } from "$env/dynamic/private";
 
 export const load: PageServerLoad = async ({ platform, parent }) => {
 	const { user } = await parent();
@@ -21,7 +22,20 @@ export const load: PageServerLoad = async ({ platform, parent }) => {
 		}
 	})
 
-	return { user, responses }
+	// oddly need to be fed this way to be protected by login.
+	const bankDetails = {
+		gbpBankName: env.SECRET_GBP_BANK_NAME,
+		gbpBeneficiary: env.SECRET_GBP_BENEFICIARY,
+		gbpSortCode: env.SECRET_GBP_SORT_CODE,
+		gbpAccountNumber: env.SECRET_GBP_ACCOUNT_NUMBER,
+		eurBeneficiary: env.SECRET_EUR_BENEFICIARY,
+		eurBankName: env.SECRET_EUR_BANK_NAME,
+		eurIban: env.SECRET_EUR_IBAN,
+		lucaRevtag: env.SECRET_LUCA_REVTAG,
+		sarahRevtag: env.SECRET_SARAH_REVTAG
+	} satisfies BankDetails;
+
+	return { user, responses, bankDetails }
 };
 
 export const actions = {

@@ -4,8 +4,10 @@ import Loader from "~icons/tabler/loader-2";
 import type { Invite } from "@prisma/client";
 import { localPhoneNumber } from "$lib/utils";
 import { enhance } from "$app/forms";
+import { languageTag } from "$paraglide/runtime";
 
 const { invite, updated }: { invite: Invite, updated: boolean } = $props();
+const lang = languageTag();
 let email = $state(invite.emailAddress);
 let phone = $state(localPhoneNumber(invite.phoneNumber));
 let submitting = $state(false);
@@ -34,6 +36,10 @@ let submitting = $state(false);
             {m.fun_mean_frog_cuddle()}
         {/if}
     </button>
+    {#if lang === "en" || lang === "it"}
+    <hr>
+    <a class="button wide secondary" href="/gifts">{m.only_aware_husky_propel()}</a>
+    {/if}
 </form>
 
 <style>
