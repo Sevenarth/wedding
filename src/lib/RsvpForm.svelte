@@ -108,11 +108,11 @@ const addGuest = (e: ButtonEvent) => {
         <div class="text-center text-lg">
             <p>
                 {#if response.givenResponse === ResponseType.Accepted}
-                <CheckIcon class="icon w-8 h-8 border-2 border-black rounded-full" />
+                <CheckIcon class="icon w-8 h-8 border-[3px] border-black rounded-full" />
                 {:else if response.givenResponse === ResponseType.Tentative}
-                <QuestionIcon class="icon w-8 h-8 border-2 border-black rounded-full" />
+                <QuestionIcon class="icon w-8 h-8 border-[3px] border-black rounded-full" />
                 {:else}
-                <SadIcon class="icon w-8 h-8" />
+                <SadIcon class="icon w-10 h-10" />
                 {/if}
             </p>
             <p class="font-medium">
