@@ -1,12 +1,13 @@
 <script lang="ts">
-	import Footer from '$lib/Footer.svelte';
+import { page } from "$app/state";
+import Footer from '$lib/Footer.svelte';
 import Header from '$lib/Header.svelte';
-	import '../../app.css';
-	let { children } = $props();
+import '../../app.css';
+let { children } = $props();
 </script>
 
 <header>
-    <a href="/"><Header small /></a>
+    <Header small backlink={page.route.id !== "/(auth)/rsvp"} />
 </header>
 <section id="main" class="px-4 py-4">
     {@render children()}

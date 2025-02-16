@@ -5,8 +5,8 @@ import { requireUser } from '$lib/auth.server';
 import { intlPhoneNumber } from '$lib/utils';
 import { Location, ResponseType } from '@prisma/client';
 
-export const load: PageServerLoad = async ({ locals, platform, url }) => {
-	const user = requireUser(locals, url)
+export const load: PageServerLoad = async ({ platform, parent }) => {
+	const { user } = await parent();
 	
 	const responses = await prisma(platform).response.findMany({
 		where: {
