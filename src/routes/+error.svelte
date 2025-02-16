@@ -6,9 +6,7 @@ import Header from '$lib/Header.svelte';
 import '../app.css';
 </script>
 
-<header>
-    <a href="/"><Header small /></a>
-</header>
+<Header small />
 <section id="main" class="px-4 py-4">
     <h1>{page.status} {page.error?.message}</h1>
     {#if page.status === 404}
