@@ -1,4 +1,5 @@
 <script lang="ts">
+    import * as m from "$paraglide/messages";
     import ChevronLeft from "~icons/tabler/chevron-left";
     import anagramBlack from "$lib/assets/anagram.png";
     import anagramGreen from "$lib/assets/anagram-green.png";
@@ -12,7 +13,7 @@
 
 <header class={`flex w-full justify-center items-center ${margin}`}>
     {#if backlink}
-        <a href="/rsvp" class="text-xl grow basis-0"><ChevronLeft class="icon mr-1" />Go back</a>
+        <a href="/rsvp" class="text-xl grow basis-0"><ChevronLeft class="icon mr-1" />{m.tired_raw_gibbon_boost()}</a>
     {/if}
     <a href="/"><img class={`object-contain ${margin} ${width}`} src={anagramSrc} alt="S&L"></a>
     {#if backlink}
