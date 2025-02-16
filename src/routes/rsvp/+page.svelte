@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as m from "$paraglide/messages";
 import { PUBLIC_ROMANIA_DEADLINE, PUBLIC_ITALY_DEADLINE } from "$env/static/public";
 import ContactsForm from "$lib/ContactsForm.svelte";
 import RsvpForm from "$lib/RsvpForm.svelte";
@@ -15,8 +16,8 @@ const romaniaError = $derived(form?.location === Location.Romania ? form?.error 
 const italyError = $derived(form?.location === Location.Italy ? form?.error : null)
 </script>
 
-<h1>Hello {name},</h1>
-<p>Welcome to your reserved area! Please find the wedding timeline, information and the form to RSVP.</p>
+<h1>{m.aware_mean_otter_prosper()} {name},</h1>
+<p>{m.noble_bald_gopher_advise()}</p>
 <div class="split">
 	<main>
 		{#if romania}
@@ -28,7 +29,7 @@ const italyError = $derived(form?.location === Location.Italy ? form?.error : nu
 		<ContactsForm invite={form?.invite ?? invite} updated={!!form?.invite} />
 	</main>
 	<aside>
-		<h2>Timeline</h2>
+		<h2>{m.due_early_mammoth_mend()}</h2>
 		<Timeline italy={!!italy} romania={!!romania} />
 	</aside>
 </div>

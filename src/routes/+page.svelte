@@ -17,10 +17,10 @@
         <Header big coloured />
         <h1>{m.heroic_less_jackal_arrive()}</h1>
         <div class="flex flex-col items-center my-10">
-            <span>Thank you for visiting our page!</span>
-            <a href="/auth" class="my-8 button big" tabindex="0">RSVP here</a>
+            <span>{m.north_fancy_quail_absorb()}</span>
+            <a href="/auth" class="my-8 button big" tabindex="0">{m.real_teary_puffin_favor()}</a>
         </div>
-        <h2 class="mb-28 md:mb-16 text-6xl">Our story</h2>
+        <h2 class="mb-28 md:mb-16 text-6xl">{m.great_keen_husky_drum()}</h2>
     </div>
 </section>
 

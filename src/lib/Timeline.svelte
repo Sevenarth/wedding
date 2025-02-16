@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as m from "$paraglide/messages";
 import domnita_balasa_outline from "$lib/assets/domnita_balasa_outline.png";
 import wow_hambar_outline from "$lib/assets/wowhambar_outline.png";
 import paolotti_outline from "$lib/assets/paolotti_outline.png";
@@ -8,50 +9,50 @@ let { italy = false, romania = false } = $props();
 </script>
 
 {#if romania}
-<p>31st May 2025 &bullet; Romania</p>
+<p>{m.loved_minor_nils_cherish()}</p>
 <ol>
     <li>
-        <time>13.00</time>
-        <p class="font-semibold">Orthodox Wedding</p>
-        <p>Domnița Bălașa Church</p>
-        <p>Strada Sfinții Apostoli 60, Bucharest</p>
+        <time datetime="2025-05-31T13:00:00+03:00">13.00</time>
+        <p class="font-semibold">{m.super_tired_tapir_relish()}</p>
+        <p>{m.deft_pink_gibbon_earn()}</p>
+        <p>{m.plane_mealy_goat_mix()}</p>
         <a href="https://maps.app.goo.gl/2X14PMoBVRF213xi6" target="_blank">Google Maps</a>
         <img src={domnita_balasa_outline} alt="Church Outline" />
     </li>
-    <li>Guests are expected to take a break until the reception.</li>
+    <li>{m.aloof_free_snake_loop()}</li>
     <li>
-        <time>17.00</time>
-        <p class="font-semibold">Wedding Reception</p>
+        <time datetime="2025-05-31T17:00:00+03:00">17.00</time>
+        <p class="font-semibold">{m.acidic_such_camel_bend()}</p>
         <p>WOW Hambar</p>
         <p>Strada Haltei, Domnești</p>
         <a href="https://maps.app.goo.gl/eRAS6TnNHNdoNRb97" target="_blank">Google Maps</a>
         <img src={wow_hambar_outline} alt="WOW Hambar Outline" />
     </li>
-    <li>We expect the reception will start dying down from 3am.</li>
+    <li>{m.merry_legal_mole_urge()}</li>
 </ol>
 {/if}
 
 {#if italy}
-<p>6th June 2025 &bullet; Italy</p>
+<p>{m.icy_best_mink_pause()}</p>
 <ol>
     <li>
-        <time>17.00</time>
-        <p class="font-semibold">Wedding Blessing Catholic Mass</p>
-        <p>Chiesa di San Francesco di Paola</p>
+        <time datetime="2025-06-06T17:00:00+02:00">17.00</time>
+        <p class="font-semibold">{m.short_due_elk_vent()}</p>
+        <p>{m.day_royal_lizard_file()}</p>
         <p>Via XXV Luglio, Grottaglie</p>
         <a href="https://maps.app.goo.gl/AFELJNB2k3rUs4ca9" target="_blank">Google Maps</a>
         <img src={paolotti_outline} alt="Church Outline" />
     </li>
-    <li>Guests are expected to travel towards the wedding reception. They will be received with a welcome drink while the newlyweds arrive.</li>
+    <li>{m.such_away_whale_belong()}</li>
     <li>
-        <time>19.00</time>
-        <p class="font-semibold">Wedding Reception</p>
+        <time datetime="2025-06-06T19:00:00+02:00">19.00</time>
+        <p class="font-semibold">{m.acidic_such_camel_bend()}</p>
         <p>Castello Monaci</p>
         <p>Contrada Monaci, Salice Salentino</p>
         <a href="https://maps.app.goo.gl/hRpr1aAoCsXFxmUS6" target="_blank">Google Maps</a>
         <img src={castello_monaci_outline} alt="Castello Monaci Outline" />
     </li>
-    <li>We expect the reception to end from 1am onwards, with the curfew at 2am.</li>
+    <li>{m.safe_livid_flea_yell()}</li>
 </ol>
 {/if}
 

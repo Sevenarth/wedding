@@ -1,10 +1,11 @@
 <script>
-	import GithubLogo from "~icons/tabler/brand-github";
+import * as m from "$paraglide/messages";
+import GithubLogo from "~icons/tabler/brand-github";
 </script>
 
 <footer>
-	<p>Made with ❤️ by your groom.</p>
-	<a href="https://github.com/Sevenarth/wedding" target="_blank">View on <GithubLogo class="icon" /></a>
+	<p>{m.due_wide_fireant_shine()}</p>
+	<a href="https://github.com/Sevenarth/wedding" target="_blank">{m.flaky_sour_angelfish_adapt()} <GithubLogo class="icon" /></a>
 </footer>
 
 <style>

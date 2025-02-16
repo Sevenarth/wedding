@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as m from "$paraglide/messages";
 import Loader from "~icons/tabler/loader-2";
 import type { Invite } from "@prisma/client";
 import { localPhoneNumber } from "$lib/utils";
@@ -18,19 +19,19 @@ let submitting = $state(false);
     };
   }}>
     {#if updated && !submitting}
-        <div class="notice small success">Your contact details have been updated!</div>
+        <div class="notice small success">{m.alert_stale_snake_list()}</div>
     {/if}
-    <div class="notice small">It is not mandatory to give us your contact details. But if you do, you'll receive updates if any. Your details won't be shared with anyone, only Luca will have access to these.</div>
-    <label for="email">Email address</label>
-    <input id="email" type="email" name="emailAddress" placeholder="e.g. me@example.com" autocomplete="email" bind:value={email}  />
-    <label for="phone">Phone number</label>
-    <input id="phone" type="tel" name="phoneNumber" placeholder="e.g. 07999123456" autocomplete="tel" bind:value={phone} />
-    <div class="notice small">If your phone number is not British, please add an international prefix.</div>
+    <div class="notice small">{m.major_east_niklas_gulp()}</div>
+    <label for="email">{m.funny_inner_wallaby_assure()}</label>
+    <input id="email" type="email" name="emailAddress" placeholder={m.hour_salty_jay_expand()} autocomplete="email" bind:value={email}  />
+    <label for="phone">{m.sea_brave_yak_dazzle()}</label>
+    <input id="phone" type="tel" name="phoneNumber" placeholder={m.stout_day_duck_fall()} autocomplete="tel" bind:value={phone} />
+    <div class="notice small">{m.knotty_white_macaw_approve()}</div>
     <button class="wide secondary" disabled={submitting}>
         {#if submitting}
             <Loader class="icon text-2xl animate-spin" />
         {:else}
-            Update your contact details
+            {m.fun_mean_frog_cuddle()}
         {/if}
     </button>
 </form>

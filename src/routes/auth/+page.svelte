@@ -38,13 +38,13 @@ $effect(() => {
 
 <section id="where-is-my-code">
     <div class="max-w-md p-8 bg-white shadow-xl m-auto">
-        <h3>Have you personally received the invitation?</h3>
-        <p>You can find your code on the bottom left corner of the front of your envelope, it's a 4 digit number.</p>
-        <img src={personalEnvelope} alt="Plain envelope" class="object-contain h-32 mx-auto" />
-        <h3>Have you received the invitation in the post?</h3>
-        <p>Your code is your post code as written on your envelope.</p>
-        <img src={addressedEnvelope} alt="Addressed envelope" class="object-contain h-32 mx-auto" />
-        <a href="#/" class="button secondary wide" tabindex="0">Close</a>
+        <h3>{m.legal_many_canary_nourish()}</h3>
+        <p>{m.heavy_nimble_gorilla_jump()}</p>
+        <img src={personalEnvelope} alt={m.large_proud_bobcat_reap()} class="object-contain h-32 mx-auto" />
+        <h3>{m.weak_smug_lark_delight()}</h3>
+        <p>{m.grassy_suave_insect_fall()}</p>
+        <img src={addressedEnvelope} alt={m.home_bright_moose_loop()} class="object-contain h-32 mx-auto" />
+        <a href="#/" class="button secondary wide" tabindex="0">{m.fluffy_away_pig_support()}</a>
     </div>
 </section>
 
@@ -52,19 +52,19 @@ $effect(() => {
     <img src={coralPeonies} alt="Coral Peonies" class="absolute inset-0 w-full h-full object-cover z-[-1]" />
     <div class="overlay w-full min-h-dvh flex flex-col justify-between items-center pt-12 px-8 z-[2] text-xl md:text-2xl">
         <Header coloured />
-        <h2 class="text-5xl mb-6">Your invitation</h2>
+        <h2 class="text-5xl mb-6">{m.sound_funny_lionfish_flip()}</h2>
         <form bind:this={formEl} method="post" class="grow flex flex-col w-full max-w-sm text-black" {onsubmit}>
             <div class="inputs">
                 {#if form?.error}<div class="notice error">{form.error}</div>{/if}
-                {#if redirectTo}<div class="notice">You need to login before continuing.</div>{/if}
+                {#if redirectTo}<div class="notice">{m.seemly_formal_tuna_pop()}</div>{/if}
                 <div class="flex flex-col text-left">
-                    <label for="name">Your name</label>
-                    <input type="text" id="name" name="name" bind:value={name} autocomplete="given-name" placeholder="e.g. John" />
+                    <label for="name">{m.tasty_neat_orangutan_engage()}</label>
+                    <input type="text" id="name" name="name" bind:value={name} autocomplete="given-name" placeholder={m.arable_dark_clownfish_conquer()} />
                 </div>
                 <div class="flex flex-col text-left">
-                    <label for="access-code">Your access code</label>
-                    <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder="e.g. 1234" bind:value={accessCode} />
-                    <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon" /> <span class="underline">Where is my code?</span></a>
+                    <label for="access-code">{m.stale_only_kangaroo_care()}</label>
+                    <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder={m.top_male_pelican_hurl()} bind:value={accessCode} />
+                    <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon" /> <span class="underline">{m.crisp_pretty_piranha_trust()}</span></a>
                 </div>
                 <Turnstile {siteKey} size="invisible" on:callback={() => { turnstileReady = true }} />
             </div>
@@ -73,11 +73,11 @@ $effect(() => {
                     {#if submitting}
                         <Loader class="icon text-2xl animate-spin" />
                     {:else}
-                        Enter
+                        {m.odd_antsy_cobra_find()}
                     {/if}
                 </button>
                 <a href="/" class="button secondary" tabindex="0">
-                    <ChevronLeft class="icon" /> Return to the homepage
+                    <ChevronLeft class="icon" /> {m.heavy_dizzy_yak_walk()}
                 </a>
             </div>
         </form>

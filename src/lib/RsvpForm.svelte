@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as m from "$paraglide/messages";
 import Loader from "~icons/tabler/loader-2";
 import MinusIcon from "~icons/tabler/minus";
 import PlusIcon from "~icons/tabler/plus";
@@ -59,48 +60,48 @@ const addGuest = (e: ButtonEvent) => {
   }}>
     <h1>
         {#if location === Location.Italy}
-        Puglia, Italy
+        {m.solid_grassy_kudu_sing()}
         {:else if location === Location.Romania}
-        Bucharest, Romania
+        {m.cool_awful_barbel_race()}
         {/if}
     </h1>
     {#if (response.givenResponse === ResponseType.NoResponse || editing) && deadline > new Date()}
-        {#if error}<div class="notice error small">An error has occurred while submitting your response ({error}), please try again or reach out to us.</div>{/if}
-        <p>Will you be able to join us?</p>
-        <div class="notice small"><span class="font-semibold">Note that</span> you will be able to change your reply by <time class="italic">{deadline.toDateString()}</time>. But if none will be provided by then, your response will be automatically set to no. If you give us <a href="#contact-details">your contact details</a>, we'll send you reminders.</div>
+        {#if error}<div class="notice error small">{m.light_patient_hamster_twirl()} ({error}), {m.silly_fun_octopus_enchant()}</div>{/if}
+        <p>{m.these_frail_lynx_create()}</p>
+        <div class="notice small"><span class="font-semibold">{m.formal_east_porpoise_jump()}</span> {m.safe_chunky_squid_clap()} <time class="italic">{deadline.toDateString()}</time>. {m.known_lost_bullock_vent()} <a href="#contact-details">{m.trite_tense_ape_dine()}</a>, {m.still_white_gibbon_advise()}</div>
         <div class="flex justify-around gap-2">
             <label class="button red wide grow">
                 <input bind:group={givenResponse} type="radio" name="response" value={ResponseType.Declined} required />
                 <XIcon class="icon" /><br />
-                Can't come
+                {m.loose_lost_cheetah_value()}
             </label>
             <label class="button amber wide grow">
                 <input bind:group={givenResponse} type="radio" name="response" value={ResponseType.Tentative} />
                 <QuestionIcon class="icon" /><br />
-                Maybe will
+                {m.fun_brief_canary_belong()}
             </label>
             <label class="button green wide grow">
                 <input bind:group={givenResponse} type="radio" name="response" value={ResponseType.Accepted} />
                 <CheckIcon class="icon" /><br />
-                Yes!
+                {m.noisy_game_millipede_glow()}
             </label>
         </div>
         {#if coming}
-        <p>How many people are you going to be?</p>
+        <p>{m.mellow_muddy_mink_persist()}</p>
         <div class="selection">
             <button class="secondary" onclick={removeGuest} disabled={guests === MIN_GUESTS}><MinusIcon class="icon w-7 h-7" /></button>
             <span class="text-4xl">{guests}</span>
             <button class="secondary" onclick={addGuest} disabled={guests == MAX_GUESTS}><PlusIcon class="icon w-7 h-7" /></button>
         </div>
         {/if}
-        {#if guests == MAX_GUESTS}<div class="notice warning small">If you are going to be more than {guests}, please reach out to us.</div>{/if}
+        {#if guests == MAX_GUESTS}<div class="notice warning small">{m.yummy_equal_niklas_spur()} {guests}, {m.many_helpful_moose_grace()}</div>{/if}
         <input type="hidden" name="location" value={location} />
         <input type="hidden" name="guests" bind:value={guests} />
         <button type="submit" class="wide">
             {#if submitting}
             <Loader class="icon text-2xl animate-spin" />
             {:else}
-            Submit response
+            {m.kind_civil_mantis_sprout()}
             {/if}
         </button>
     {:else}
@@ -116,45 +117,45 @@ const addGuest = (e: ButtonEvent) => {
             </p>
             <p class="font-medium">
                 {#if response.givenResponse === ResponseType.Accepted}
-                Thank you for your response! We're looking forward to seeing you!
+                {m.many_level_lion_dial()}
                 {:else if response.givenResponse === ResponseType.Tentative}
-                Thank you for your response! We hope you can make it!
+                {m.brave_full_squirrel_expand()}
                 {:else if response.givenResponse === ResponseType.Declined}
-                Thank you for letting us know! We're sorry you can't make it.
+                {m.fun_whole_loris_reside()} {m.small_lime_cockroach_accept()}
                 {:else}
-                We're sorry you can't make it!
+                {m.small_lime_cockroach_accept()}
                 {/if}
             </p>
             <p>
                 {#if response.givenResponse === ResponseType.Accepted || response.givenResponse === ResponseType.Tentative}
-                You have confirmed {#if response.givenResponse === ResponseType.Tentative}tentative{/if} attendance for <span class="font-semibold text-2xl">{response.persons.length}</span> {response.persons.length > 1 ? "guests" : "guest"}.
+                {m.chunky_less_dachshund_flip()} {#if response.givenResponse === ResponseType.Tentative}{m.sweet_fresh_fish_dash()}{/if} {m.quiet_any_falcon_aid()} <span class="font-semibold text-2xl">{response.persons.length}</span> {response.persons.length > 1 ? m.sad_zany_bear_support() : m.cool_gaudy_bumblebee_arrive()}.
                 {:else if response.givenResponse === ResponseType.Declined}
-                You have confirmed that you won't be able to join us.
+                {m.mellow_flaky_shrike_gaze()}
                 {:else}
-                Sadly, we have never heard from you. We are assuming you won't be able to join us.
+                {m.big_arable_swallow_hike()}
                 {/if}
             </p>
         </div>
         {#if response.givenResponse !== ResponseType.Declined && response.givenResponse !== ResponseType.NoResponse}
         <div class="notice small">
-           Closer to date you will be asked for your names, food preferences and dietary requirements. If you want to be updated, please <a href="#contact-details">provide us with your contact details</a>.
+           {m.simple_formal_flea_foster()}, <a href="#contact-details">{m.best_left_coyote_buzz()}</a>.
         </div>
         {/if}
         {#if deadline > new Date()}
         <div class="notice small" class:warning={response.givenResponse === ResponseType.Tentative}>
             {#if response.givenResponse === ResponseType.Tentative}
-            Please make sure to confirm your attendance by <time class="italic">{deadline.toDateString()}</time>. If you setup your contact details, we'll send you reminders.
+            {m.mushy_acidic_blackbird_treat()} <time class="italic">{deadline.toDateString()}</time>. {m.dark_yummy_spider_amuse()}
             {:else}
-            You still have time to change your response until <time class="italic">{deadline.toDateString()}</time>.
+            {m.cool_keen_macaw_glow()} <time class="italic">{deadline.toDateString()}</time>.
             {/if}
         </div>
-        <button class="secondary wide" onclick={e => { e.preventDefault(); editing = true }}>Change your response</button>
+        <button class="secondary wide" onclick={e => { e.preventDefault(); editing = true }}>{m.small_key_gull_breathe()}</button>
         {:else}
-        <div class="notice warning small">The deadline for changing your response has passed. If you need to make any changes, please reach out to us.</div>
+        <div class="notice warning small">{m.basic_pink_ladybug_honor()}</div>
         {/if}
     {/if}
     <hr />
-	<a href={`/${response.location.toLowerCase()}/travel-information`} class="button secondary wide">Travel Information</a>
+	<a href={`/${response.location.toLowerCase()}/travel-information`} class="button secondary wide">{m.alive_loose_deer_fear()}</a>
 </form>
 
 <style>
