@@ -12,7 +12,7 @@
 
 <header class={`flex w-full justify-center items-center ${margin}`}>
     {#if backlink}
-        <a href="/rsvp" class="text-xl grow basis-0"><ChevronLeft class="icon" /> Go back</a>
+        <a href="/rsvp" class="text-xl grow basis-0"><ChevronLeft class="icon mr-1" />Go back</a>
     {/if}
     <a href="/"><img class={`object-contain ${margin} ${width}`} src={anagramSrc} alt="S&L"></a>
     {#if backlink}
