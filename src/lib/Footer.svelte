@@ -5,7 +5,7 @@ import GithubLogo from "~icons/tabler/brand-github";
 
 <footer>
 	<p>{m.due_wide_fireant_shine()}</p>
-	<a href="https://github.com/Sevenarth/wedding" target="_blank">{m.flaky_sour_angelfish_adapt()} <GithubLogo class="icon" /></a>
+	<a href="https://github.com/Sevenarth/wedding" target="_blank">{m.flaky_sour_angelfish_adapt()}<GithubLogo class="icon ml-1" /></a>
 </footer>
 
 <style>

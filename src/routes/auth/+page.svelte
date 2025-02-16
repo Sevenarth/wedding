@@ -64,7 +64,7 @@ $effect(() => {
                 <div class="flex flex-col text-left">
                     <label for="access-code">{m.stale_only_kangaroo_care()}</label>
                     <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder={m.top_male_pelican_hurl()} bind:value={accessCode} />
-                    <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon" /> <span class="underline">{m.crisp_pretty_piranha_trust()}</span></a>
+                    <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon mr-1" /><span class="underline">{m.crisp_pretty_piranha_trust()}</span></a>
                 </div>
                 <Turnstile {siteKey} size="invisible" on:callback={() => { turnstileReady = true }} />
             </div>
