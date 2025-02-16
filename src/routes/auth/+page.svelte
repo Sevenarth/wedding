@@ -52,7 +52,7 @@ $effect(() => {
     <img src={coralPeonies} alt="Coral Peonies" class="absolute inset-0 w-full h-full object-cover z-[-1]" />
     <div class="overlay w-full min-h-dvh flex flex-col justify-between items-center pt-12 px-8 z-[2] text-xl md:text-2xl">
         <Header coloured />
-        <h2 class="text-5xl mb-6">{m.sound_funny_lionfish_flip()}</h2>
+        <h2 class="text-5xl mb-6 text-center">{m.sound_funny_lionfish_flip()}</h2>
         <form bind:this={formEl} method="post" class="grow flex flex-col w-full max-w-sm text-black" {onsubmit}>
             <div class="inputs">
                 {#if form?.error}<div class="notice error">{form.error}</div>{/if}
