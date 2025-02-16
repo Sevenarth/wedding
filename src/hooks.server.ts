@@ -9,8 +9,9 @@ const hostnamesToLocale: Record<string, AvailableLanguageTag> = {
 };
 
 export const handle: Handle = async ({ event, resolve }) => {
+    const country = event.platform?.cf?.country;
     const hostname = event.url.hostname;
-    const locale = hostnamesToLocale[hostname] ?? sourceLanguageTag;
+    const locale = hostnamesToLocale[hostname] ?? (country === "RO" ? "ro" : (country === "IT" ? "it" : sourceLanguageTag));
 
     setLanguageTag(locale);
 
