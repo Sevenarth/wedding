@@ -2,7 +2,7 @@
 import ChevronLeft from "~icons/tabler/chevron-left";
 import Help from "~icons/tabler/help";
 import Loader from "~icons/tabler/loader-2";
-import { PUBLIC_TURNSTILE_KEY as siteKey } from "$env/static/public";
+import { env } from "$env/dynamic/public";
 import * as m from "$paraglide/messages";
 import { page } from '$app/state';
 import coralPeonies from "$lib/assets/coral-peonies.png";
@@ -66,7 +66,7 @@ $effect(() => {
                     <input type="text" id="access-code" name="access-code" autocomplete="current-password" placeholder={m.top_male_pelican_hurl()} bind:value={accessCode} />
                     <a href="#where-is-my-code" class="text-lg" tabindex="0"><Help class="icon mr-1" /><span class="underline">{m.crisp_pretty_piranha_trust()}</span></a>
                 </div>
-                <Turnstile {siteKey} size="invisible" on:callback={() => { turnstileReady = true }} />
+                <Turnstile siteKey={env.PUBLIC_TURNSTILE_KEY} size="invisible" on:callback={() => { turnstileReady = true }} />
             </div>
             <div class="flex flex-col mb-8">
                 <button tabindex="0" class="mb-4 big" disabled={submitting}>

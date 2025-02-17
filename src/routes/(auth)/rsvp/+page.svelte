@@ -1,6 +1,6 @@
 <script lang="ts">
 import * as m from "$paraglide/messages";
-import { PUBLIC_ROMANIA_DEADLINE, PUBLIC_ITALY_DEADLINE } from "$env/static/public";
+import { env } from "$env/dynamic/public";
 import ContactsForm from "$lib/ContactsForm.svelte";
 import RsvpForm from "$lib/RsvpForm.svelte";
 import Timeline from "$lib/Timeline.svelte";
@@ -21,10 +21,10 @@ const italyError = $derived(form?.location === Location.Italy ? form?.error : nu
 <div class="split">
 	<main>
 		{#if romania}
-		<RsvpForm response={romania} location={Location.Romania} deadline={new Date(PUBLIC_ROMANIA_DEADLINE)} error={romaniaError} />
+		<RsvpForm response={romania} location={Location.Romania} deadline={new Date(env.PUBLIC_ROMANIA_DEADLINE)} error={romaniaError} />
 		{/if}
 		{#if italy}
-		<RsvpForm response={italy} location={Location.Italy} deadline={new Date(PUBLIC_ITALY_DEADLINE)} error={italyError} />
+		<RsvpForm response={italy} location={Location.Italy} deadline={new Date(env.PUBLIC_ITALY_DEADLINE)} error={italyError} />
 		{/if}
 		<ContactsForm invite={form?.invite ?? invite} updated={!!form?.invite} />
 	</main>

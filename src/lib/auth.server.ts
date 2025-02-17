@@ -1,6 +1,6 @@
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
-import { SECRET_JWT_KEY } from "$env/static/private";
-import { PUBLIC_EXPIRATION_INTERVAL } from "$env/static/public";
+import { env } from "$env/dynamic/private";
+import { env as envPublic } from "$env/dynamic/public";
 import { redirect, type Cookies } from '@sveltejs/kit';
 import prisma from '$lib/prisma.server';
 import type { User } from '$lib/auth';
@@ -8,7 +8,7 @@ import type { User } from '$lib/auth';
 
 const COOKIE_NAME =  "auth.jwt";
 
-const secret = new TextEncoder().encode(SECRET_JWT_KEY);
+const secret = new TextEncoder().encode(env.SECRET_JWT_KEY);
 
 type Payload = JWTPayload & { name: string, inviteId: string }
 
@@ -17,7 +17,7 @@ async function generateJWT(name: string, inviteId: string): Promise<string> {
     return new SignJWT({ name, inviteId })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setExpirationTime(PUBLIC_EXPIRATION_INTERVAL)
+        .setExpirationTime(envPublic.PUBLIC_EXPIRATION_INTERVAL)
         .sign(secret);
 }
 

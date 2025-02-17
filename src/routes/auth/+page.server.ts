@@ -1,4 +1,4 @@
-import { SECRET_TURNSTILE_KEY as SECRET_KEY } from "$env/static/private";
+import { env } from "$env/dynamic/private";
 import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import * as m from "$paraglide/messages";
@@ -23,7 +23,7 @@ const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/sit
 
 async function validateToken(request: Request, token: FormDataEntryValue): Promise<{success: boolean, error: string | undefined}> {
     const formData = new FormData();
-    formData.append("secret", SECRET_KEY);
+    formData.append("secret", env.SECRET_TURNSTILE_KEY ?? "");
     formData.append("response", token);
     formData.append("remoteip", request.headers.get("CF-Connecting-IP") || "");
 
