@@ -68,7 +68,7 @@ const addGuest = (e: ButtonEvent) => {
     {#if (response.givenResponse === ResponseType.NoResponse || editing) && deadline > new Date()}
         {#if error}<div class="notice error small">{m.light_patient_hamster_twirl()} ({error}), {m.silly_fun_octopus_enchant()}</div>{/if}
         <p>{m.these_frail_lynx_create()}</p>
-        <div class="notice small"><span class="font-semibold">{m.formal_east_porpoise_jump()}</span> {m.safe_chunky_squid_clap()} <time class="italic">{deadline.toDateString()}</time>. {m.known_lost_bullock_vent()} <a href="#contact-details">{m.trite_tense_ape_dine()}</a>, {m.still_white_gibbon_advise()}</div>
+        <div class="notice small"><span class="font-semibold">{m.formal_east_porpoise_jump()}</span> {m.safe_chunky_squid_clap()} <time class="italic">{deadline.toLocaleDateString()}</time>. {m.known_lost_bullock_vent()} <a href="#contact-details">{m.trite_tense_ape_dine()}</a>, {m.still_white_gibbon_advise()}</div>
         <div class="flex justify-around gap-2">
             <label class="button red wide grow">
                 <input bind:group={givenResponse} type="radio" name="response" value={ResponseType.Declined} required />
@@ -144,9 +144,9 @@ const addGuest = (e: ButtonEvent) => {
         {#if deadline > new Date()}
         <div class="notice small" class:warning={response.givenResponse === ResponseType.Tentative}>
             {#if response.givenResponse === ResponseType.Tentative}
-            {m.mushy_acidic_blackbird_treat()} <time class="italic">{deadline.toDateString()}</time>. {m.dark_yummy_spider_amuse()}
+            {m.mushy_acidic_blackbird_treat()} <time class="italic">{deadline.toLocaleDateString()}</time>. {m.dark_yummy_spider_amuse()}
             {:else}
-            {m.cool_keen_macaw_glow()} <time class="italic">{deadline.toDateString()}</time>.
+            {m.cool_keen_macaw_glow()} <time class="italic">{deadline.toLocaleDateString()}</time>.
             {/if}
         </div>
         <button class="secondary wide" onclick={e => { e.preventDefault(); editing = true }}>{m.small_key_gull_breathe()}</button>
