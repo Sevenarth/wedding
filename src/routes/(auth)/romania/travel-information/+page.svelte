@@ -45,7 +45,7 @@ let lang = $state(defaultLang);
         <strong>Dall'aeroporto alla città</strong>:
         <ul>
             <li><strong>Taxi &amp; Ride-Sharing</strong>: Usa <strong>Bolt</strong> o <strong>Uber</strong> per viaggi sicuri e a prezzi ragionevoli. Evita taxi non ufficiali che offrono corse all'interno del terminal.</li>
-            <li><strong>Trasporto Pubblico</strong>: L'<strong>Autobus Express 783</strong> opera 24/7 tra l'aeroporto e il centro città. In alternativa, puoi prendere il <strong>treno dall'aeroporto</strong> fino a <strong>Gara de Nord (Stazione Ferroviaria Nord di Bucarest)</strong>, poi utilizzare la metro o il servizio di ride-sharing.</li>
+            <li><strong>Trasporto Pubblico</strong>: La linea autobus <strong>100 Express</strong> opera 24/7 tra l'aeroporto e il centro città. In alternativa, puoi prendere il <strong>treno dall'aeroporto</strong> fino a <strong>Gara de Nord (Stazione Ferroviaria Nord di Bucarest)</strong>, poi utilizzare la metro o il servizio di ride-sharing.</li>
         </ul>
     </li>
 </ul>
@@ -122,7 +122,7 @@ let lang = $state(defaultLang);
         <strong>From the Airport to the City</strong>:
         <ul>
             <li><strong>Taxi &amp; Ride-Sharing</strong>: Use <strong>Bolt</strong> or <strong>Uber</strong> for safe and reasonably priced rides. Avoid unofficial taxis offering rides inside the terminal.</li>
-            <li><strong>Public Transport</strong>: The <strong>783 Express Bus</strong> runs 24/7 between the airport and the city center. Alternatively, you can take the <strong>train from the airport</strong> to <strong>Gara de Nord (Bucharest North Railway Station)</strong>, then use the metro or ride-sharing service.</li>
+            <li><strong>Public Transport</strong>: The <strong>100 Express</strong> bus runs 24/7 between the airport and the city center. Alternatively, you can take the <strong>train from the airport</strong> to <strong>Gara de Nord (Bucharest North Railway Station)</strong>, then use the metro or ride-sharing service.</li>
         </ul>
     </li>
 </ul>
