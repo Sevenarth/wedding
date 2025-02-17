@@ -44,6 +44,7 @@ $effect(() => {
         <h3>{m.weak_smug_lark_delight()}</h3>
         <p>{m.grassy_suave_insect_fall()}</p>
         <img src={addressedEnvelope} alt={m.home_bright_moose_loop()} class="object-contain h-32 mx-auto" />
+        <p>{m.teal_dull_chicken_smile()}</p>
         <a href="#/" class="button secondary wide" tabindex="0">{m.fluffy_away_pig_support()}</a>
     </div>
 </section>
