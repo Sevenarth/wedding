@@ -15,7 +15,7 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 path = Path(sys.argv[1])
-psearcher = re.compile(r"(\w[\w ]+\w)(?: \(([\w, ]+)\))?")
+psearcher = re.compile(r"(\w[\w' ]+\w)(?: \(([\w', ]+)\))?")
 
 def normalise(text):
     return unicodedata.normalize("NFD", text).encode('ASCII', 'ignore').decode("utf-8").lower()
@@ -70,21 +70,26 @@ with open(path) as csvfile:
 sql = []
 now = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
 
+def esc(s):
+    return s.replace("'", "''")
+
 for invite in invites:
     accessCode, addressee, loginNames, people, locations = invite
+    accessCode = esc(accessCode)
+    addressee = esc(addressee)
     inviteId = generate_cuid()
     sql.append("INSERT INTO invites(id, addressee, createdAt, updatedAt) "
                f"VALUES('{inviteId}', '{addressee}', '{now}', '{now}')")
     for name, displayName in loginNames.items():
-        displayName = f"'{displayName}'" if displayName else "null"
+        displayName = f"'{esc(displayName)}'" if displayName else "null"
         sql.append("INSERT INTO logins(accessCode, name, displayName, inviteId, createdAt, updatedAt) "
-                   f"VALUES ('{accessCode}', '{name}', {displayName}, '{inviteId}', '{now}', '{now}')")
+                   f"VALUES ('{accessCode}', '{esc(name)}', {displayName}, '{inviteId}', '{now}', '{now}')")
     for location in locations:
         sql.append("INSERT INTO responses(location, inviteId, createdAt, updatedAt) "
-                   f"VALUES ('{location}', '{inviteId}', '{now}', '{now}')")
+                   f"VALUES ('{esc(location)}', '{inviteId}', '{now}', '{now}')")
         for i, person in enumerate(people):
             id = generate_cuid()
             sql.append("INSERT INTO persons(id, orderIndex, name, location, inviteId, createdAt, updatedAt) "
-                       f"VALUES('{id}', '{i}', '{person}', '{location}', '{inviteId}', '{now}', '{now}')")
+                       f"VALUES('{id}', '{i}', '{esc(person)}', '{esc(location)}', '{inviteId}', '{now}', '{now}')")
 
 print(";\n".join(sql))
