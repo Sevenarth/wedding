@@ -1,7 +1,7 @@
 import { env } from "$env/dynamic/private";
 import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
-import * as m from "$paraglide/messages";
+import * as m from "$lib/paraglide/messages";
 import prisma from "$lib/prisma.server";
 import { authenticateUser } from "$lib/auth.server";
 

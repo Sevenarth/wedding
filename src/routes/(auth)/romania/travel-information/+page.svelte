@@ -1,6 +1,6 @@
 <script lang="ts">
-import { languageTag } from "$paraglide/runtime";
-const defaultLang = languageTag() as string;
+import { getLocale } from "$lib/paraglide/runtime";
+const defaultLang = getLocale() as string;
 let lang = $state(defaultLang);
 </script>
 

@@ -1,5 +1,5 @@
 <script>
-import * as m from "$paraglide/messages";
+import * as m from "$lib/paraglide/messages";
 import GithubLogo from "~icons/tabler/brand-github";
 </script>
 

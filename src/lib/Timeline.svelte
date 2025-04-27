@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as m from "$paraglide/messages";
+import * as m from "$lib/paraglide/messages";
 import domnita_balasa_outline from "$lib/assets/domnita_balasa_outline.png";
 import wow_hambar_outline from "$lib/assets/wowhambar_outline.png";
 import paolotti_outline from "$lib/assets/paolotti_outline.png";

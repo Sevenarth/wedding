@@ -1,4 +1,4 @@
-import { languageTag } from "$paraglide/runtime";
+import { getLocale } from "$lib/paraglide/runtime";
 
 export interface BankDetails {
     gbpBankName: string;
@@ -22,7 +22,7 @@ export function intlPhoneNumber(phoneNumber: string | null): string | null {
     if (phoneNumber.startsWith('00'))
         return `+${phoneNumber.slice(2)}`;
 
-    switch (languageTag()) {
+    switch (getLocale()) {
         case 'en':
             if (phoneNumber.startsWith('0'))
                 phoneNumber = phoneNumber.slice(1);
@@ -41,7 +41,7 @@ export function localPhoneNumber(phoneNumber: string | null): string {
         return '';
 
     const prefix = phoneNumber.substring(0, 3);
-    const locale = languageTag();
+    const locale = getLocale();
     if (locale === 'en' && prefix === '+44')
         return `0${phoneNumber.slice(3)}`;
     else if(locale === 'it' && prefix === '+39')

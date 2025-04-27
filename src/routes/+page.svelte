@@ -1,6 +1,6 @@
 <script lang="ts">
     import '../app.css';
-    import * as m from "$paraglide/messages";
+    import * as m from "$lib/paraglide/messages";
     import coralPeonies from "$lib/assets/coral-peonies.png";
     import Header from "$lib/Header.svelte";
 	import { makeObserver } from "$lib/actions.svelte";

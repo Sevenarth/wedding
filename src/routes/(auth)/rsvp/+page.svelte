@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as m from "$paraglide/messages";
+import * as m from "$lib/paraglide/messages";
 import { env } from "$env/dynamic/public";
 import ContactsForm from "$lib/ContactsForm.svelte";
 import RsvpForm from "$lib/RsvpForm.svelte";

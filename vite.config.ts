@@ -1,6 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import { paraglide } from "@inlang/paraglide-vite"
+import { paraglideVitePlugin } from "@inlang/paraglide-js"
 import Icons from 'unplugin-icons/vite';
 
 // Fix for Prisma Client in the browser. Issue URL: https://github.com/prisma/prisma/issues/12504#issuecomment-1599452566
@@ -13,9 +13,22 @@ const prismaClientIndexBrowser = resolve('@prisma/client/index-browser').replace
 
 export default defineConfig({
 	plugins: [
-		paraglide({
+		paraglideVitePlugin({
 			project: "./project.inlang",
-			outdir: "./src/paraglide"
+			outdir: "./src/lib/paraglide",
+			strategy: ["url", "cookie", "baseLocale"],
+			urlPatterns: [
+				{
+					pattern: "https://vizzar.ro/:path(.*)?",
+					localized: [
+						["en", "https://wedding.vizzar.ro/:path(.*)?"],
+						["ro", "https://nunta.vizzar.ro/:path(.*)?"],
+						["it", "https://sposi.vizzar.ro/:path(.*)?"],
+					],
+				},
+			],
+			cookieName: "locale",
+			disableAsyncLocalStorage: true
 		}),
 		sveltekit(),
 		Icons({

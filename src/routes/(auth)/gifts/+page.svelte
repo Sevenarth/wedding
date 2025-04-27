@@ -1,8 +1,8 @@
 <script lang="ts">
-import { languageTag } from "$paraglide/runtime";
+import { getLocale } from "$lib/paraglide/runtime";
 import type { PageData } from "./$types";
 
-const lang = languageTag();
+const lang = getLocale();
 const { data }: { data: PageData } = $props();
 const bankDetails = data.bankDetails;
 </script>

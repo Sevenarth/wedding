@@ -3,7 +3,7 @@ import ChevronLeft from "~icons/tabler/chevron-left";
 import Help from "~icons/tabler/help";
 import Loader from "~icons/tabler/loader-2";
 import { env } from "$env/dynamic/public";
-import * as m from "$paraglide/messages";
+import * as m from "$lib/paraglide/messages";
 import { page } from '$app/state';
 import coralPeonies from "$lib/assets/coral-peonies.png";
 import personalEnvelope from "$lib/assets/personal-envelope.png";

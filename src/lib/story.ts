@@ -1,4 +1,4 @@
-import * as m from "$paraglide/messages";
+import * as m from "$lib/paraglide/messages";
 import Photo2016 from "$lib/assets/2016.jpg";
 import Photo2017 from "$lib/assets/2017.jpeg";
 import Photo2018Italy from "$lib/assets/2018-italy.jpeg";

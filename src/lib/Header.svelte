@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as m from "$paraglide/messages";
+    import * as m from "$lib/paraglide/messages";
     import ChevronLeft from "~icons/tabler/chevron-left";
     import anagramBlack from "$lib/assets/anagram.png";
     import anagramGreen from "$lib/assets/anagram-green.png";

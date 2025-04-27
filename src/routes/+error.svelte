@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as m from '$paraglide/messages';
+import * as m from '$lib/paraglide/messages';
 import { page } from '$app/state';
 import Footer from '$lib/Footer.svelte';
 import Header from '$lib/Header.svelte';
