@@ -42,9 +42,16 @@ model Login {
 }
 
 enum Menu {
-  Fish
-  Alternative
-  Kids
+  Primary
+  Secondary
+  Child
+  Toddler
+}
+
+enum DietaryRequirement {
+  Vegan
+  Vegetarian
+  Pescatarian
 }
 
 enum Location {
@@ -80,9 +87,10 @@ model Person {
   name String?
   orderIndex Int
 
-  menuPreference Menu @default(Fish)
-  dietaryRequirement String?
+  menuPreference Menu @default(Primary)
+  dietaryRequirement DietaryRequirement?
   allergies String?
+  confirmed Boolean @default(false)
 
   response Response @relation(fields: [inviteId, location], references: [inviteId, location])
   inviteId String
